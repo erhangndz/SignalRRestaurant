@@ -1,4 +1,5 @@
-﻿using SignalR.DataAccess.Interfaces;
+﻿using SignalR.Business.Interfaces;
+using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,43 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class FeatureService : GenericService<Feature>
+    public class FeatureService : IFeatureService
     {
-        public FeatureService(IRepository<Feature> repository) : base(repository)
+        private readonly IRepository<Feature> _featureRepository;
+
+        public FeatureService(IRepository<Feature> featureRepository)
         {
+            _featureRepository = featureRepository;
+        }
+
+        public void TAdd(Feature entity)
+        {
+           _featureRepository.Add(entity);
+        }
+
+        public void TDelete(int id)
+        {
+            _featureRepository.Delete(id);
+        }
+
+        public List<Feature> TGetAll()
+        {
+            return _featureRepository.GetAll();
+        }
+
+        public Feature TGetById(int id)
+        {
+           return _featureRepository.GetById(id);
+        }
+
+        public List<Feature> TGetFilteredList(Func<Feature, bool> predicate)
+        {
+            return _featureRepository.GetFilteredList(predicate);
+        }
+
+        public void TUpdate(Feature entity)
+        {
+            _featureRepository.Update(entity);
         }
     }
 }

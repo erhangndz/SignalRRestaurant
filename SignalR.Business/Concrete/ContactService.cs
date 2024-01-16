@@ -1,4 +1,5 @@
-﻿using SignalR.DataAccess.Interfaces;
+﻿using SignalR.Business.Interfaces;
+using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,43 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class ContactService : GenericService<Contact>
+    public class ContactService : IContactService
     {
-        public ContactService(IRepository<Contact> repository) : base(repository)
+        private readonly IRepository<Contact> _contactRepository;
+
+        public ContactService(IRepository<Contact> contactRepository)
         {
+            _contactRepository = contactRepository;
+        }
+
+        public void TAdd(Contact entity)
+        {
+            _contactRepository.Add(entity);
+        }
+
+        public void TDelete(int id)
+        {
+           _contactRepository.Delete(id);
+        }
+
+        public List<Contact> TGetAll()
+        {
+           return _contactRepository.GetAll();
+        }
+
+        public Contact TGetById(int id)
+        {
+            return _contactRepository.GetById(id);
+        }
+
+        public List<Contact> TGetFilteredList(Func<Contact, bool> predicate)
+        {
+            return _contactRepository.GetFilteredList(predicate);
+        }
+
+        public void TUpdate(Contact entity)
+        {
+            _contactRepository.Update(entity);
         }
     }
 }

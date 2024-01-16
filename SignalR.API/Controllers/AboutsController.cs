@@ -25,7 +25,8 @@ namespace SignalR.API.Controllers
         public IActionResult GetAll()
         {
             var values = _aboutService.TGetAll();
-            return Ok(values);
+            var result =_mapper.Map<List<ResultAboutDto>>(values);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

@@ -1,5 +1,6 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using SignalR.API.Extensions;
 using SignalR.Business.Concrete;
 using SignalR.Business.Interfaces;
 using SignalR.DataAccess.Concrete;
@@ -10,16 +11,15 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddServiceDependencyInjections();
 
 builder.Services.AddDbContext<SignalRContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));  
-builder.Services.AddScoped(typeof(IGenericService<>),typeof(GenericService<>));  
 
-builder.Services.AddScoped<IAboutService,AboutService>();
+
+
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddFluentValidationAutoValidation();

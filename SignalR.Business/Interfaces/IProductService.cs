@@ -1,4 +1,5 @@
-﻿using SignalR.Entity.Entities;
+﻿using SignalR.DTO.Dtos.ProductDtos;
+using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace SignalR.Business.Interfaces
 {
     public interface IProductService:IGenericService<Product>
     {
+
+        List<ResultProductWithCategoryDto> GetProductsWithCategories();
     }
 }

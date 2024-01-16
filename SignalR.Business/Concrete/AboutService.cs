@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using SignalR.Business.Interfaces;
+﻿using SignalR.Business.Interfaces;
 using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;

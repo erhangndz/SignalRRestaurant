@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignalR.DataAccess\SignalR.DataAccess.csproj" />
+    <ProjectReference Include="..\SignalR.DTO\SignalR.DTO.csproj" />
   </ItemGroup>
 
 </Project>

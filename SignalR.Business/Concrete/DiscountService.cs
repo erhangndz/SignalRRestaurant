@@ -1,4 +1,5 @@
-﻿using SignalR.DataAccess.Interfaces;
+﻿using SignalR.Business.Interfaces;
+using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,43 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class DiscountService : GenericService<Discount>
+    public class DiscountService : IDiscountService
     {
-        public DiscountService(IRepository<Discount> repository) : base(repository)
+        private readonly IRepository<Discount> _discountRepository;
+
+        public DiscountService(IRepository<Discount> discountRepository)
         {
+            _discountRepository = discountRepository;
+        }
+
+        public void TAdd(Discount entity)
+        {
+            _discountRepository.Add(entity);
+        }
+
+        public void TDelete(int id)
+        {
+            _discountRepository.Delete(id);
+        }
+
+        public List<Discount> TGetAll()
+        {
+           return _discountRepository.GetAll();
+        }
+
+        public Discount TGetById(int id)
+        {
+            return _discountRepository.GetById(id);
+        }
+
+        public List<Discount> TGetFilteredList(Func<Discount, bool> predicate)
+        {
+            return _discountRepository.GetFilteredList(predicate);
+        }
+
+        public void TUpdate(Discount entity)
+        {
+            _discountRepository.Update(entity);
         }
     }
 }

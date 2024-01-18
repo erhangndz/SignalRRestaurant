@@ -9,6 +9,7 @@ using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +62,7 @@ namespace SignalR.Business.Concrete
             return _productRepository.GetById(id);
         }
 
-        public List<Product> TGetFilteredList(Func<Product, bool> predicate)
+        public List<Product> TGetFilteredList(Expression<Func<Product, bool>> predicate)
         {
             return _productRepository.GetFilteredList(predicate);
         }

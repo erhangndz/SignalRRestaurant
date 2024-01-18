@@ -32,6 +32,7 @@ namespace SignalR.API.Controllers
 
         [HttpGet("ProductListWithCategory")]
         public IActionResult ProductListWithCategory()
+
         {
             var values = _productService.GetProductsWithCategories();
             return Ok(values);

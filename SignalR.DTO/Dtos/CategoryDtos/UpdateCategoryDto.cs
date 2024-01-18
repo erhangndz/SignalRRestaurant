@@ -11,7 +11,7 @@ namespace SignalR.DTO.Dtos.CategoryDtos
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public bool Status { get; set; }
-        public List<ResultProductDto> Products { get; set; }
+        public bool Status { get; set; } = true;
+       
     }
 }

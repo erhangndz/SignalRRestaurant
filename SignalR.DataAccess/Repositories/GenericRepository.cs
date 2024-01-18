@@ -3,6 +3,7 @@ using SignalR.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +41,7 @@ namespace SignalR.DataAccess.Repositories
             return _context.Set<T>().Find(id);
         }
 
-        public List<T> GetFilteredList(Func<T, bool> predicate)
+        public List<T> GetFilteredList(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).ToList();
         }

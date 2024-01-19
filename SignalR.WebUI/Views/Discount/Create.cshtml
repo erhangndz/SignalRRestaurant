@@ -1,0 +1,29 @@
+﻿@model CreateDiscountDto
+@{
+    ViewData["Title"] = "Yeni İndirim Oluştur";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni İndirim Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <label>İndirim Kodu</label>
+            <input type="text" asp-for="Title" class="form-control" />
+            <br />
+            <label>İndirim Oranı</label>
+            <input type="text" asp-for="DiscountRate" class="form-control" />
+            <br />
+            <label>Resim URL</label>
+            <input type="text" asp-for="ImageUrl" class="form-control" />
+            <br />
+            <label>Açıklama</label>
+            <textarea type="text" asp-for="Description" class="form-control" rows="5" ></textarea>
+            <br />
+            <button type="submit" class="btn btn-outline-primary btn-round">Kaydet</button>
+        </form>
+    </div>
+</div>
+

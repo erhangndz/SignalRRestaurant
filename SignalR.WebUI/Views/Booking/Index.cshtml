@@ -1,0 +1,46 @@
+﻿@model List<ResultBookingDto>
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Rezervasyonlar</h3>
+    </div>
+    @{
+        int count = 0;
+    }
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Ad Soyad</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Kaç Kişilik</th>
+                <th>Tarih</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>
+                    <td>@item.Name</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@item.PersonCount</td>
+                    <td>@item.BookingDate.ToShortDateString()</td>
+                    <td>
+                        <a asp-controller="Booking" asp-action="Delete" asp-route-id="@item.BookingId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="Booking" asp-action="Update" asp-route-id="@item.BookingId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Rezervasyon</a>
+    </div>
+
+
+</div>

@@ -48,7 +48,7 @@ namespace SignalR.WebUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Update(UpdateCategoryDto updateCategoryDto)
 		{
-			var response = await _client.PutAsJsonAsync("categories", updateCategoryDto);
+			 await _client.PutAsJsonAsync("categories", updateCategoryDto);
 		
 			return RedirectToAction("Index");
 		}

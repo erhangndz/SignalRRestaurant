@@ -1,0 +1,35 @@
+﻿@model UpdateBookingDto
+@{
+    ViewData["Title"] = "Rezervasyon Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Rezervasyon Güncelle</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="BookingId"/>
+            <label>Ad Soyad</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <br />
+            <label>Telefon</label>
+            <input type="text" asp-for="Phone" class="form-control" />
+            <br />
+            <label>Email</label>
+            <input type="email" asp-for="Email" class="form-control" />
+            <br />
+            <label>Kaç Kişilik</label>
+            <input type="number" asp-for="PersonCount" class="form-control" />
+            <br />
+            <label>Tarih</label>
+            <input type="date" asp-for="BookingDate" class="form-control" />
+            <br />
+            <button type="submit" class="btn btn-outline-info btn-round">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+
+

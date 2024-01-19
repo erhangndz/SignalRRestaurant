@@ -27,13 +27,13 @@
                     <td><img src="@item.ImageUrl" style="width:75px;height:75px;border-radius:50%" />   @item.Title</td>
                     <td>@item.Description</td>
                     <td>
-                        <a asp-controller="AdminAbout" asp-action="Delete" asp-route-id="@item.AboutId" class="btn btn-outline-danger">Sil</a>
-                        <a asp-controller="AdminAbout" asp-action="Update" asp-route-id="@item.AboutId" class="btn btn-outline-info">Güncelle</a>
+                        <a asp-controller="AdminAbout" asp-action="Delete" asp-route-id="@item.AboutId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="AdminAbout" asp-action="Update" asp-route-id="@item.AboutId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i>  Güncelle</a>
                     </td>
                 </tr>
             }
         </table>
-        <a asp-controller="AdminAbout" asp-action="Create" class="btn btn-outline-primary">Yeni Hakkımızda Oluştur</a>
+        <a asp-controller="AdminAbout" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i>  Yeni Hakkımızda</a>
     </div>
 
 

@@ -1,0 +1,47 @@
+﻿@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "İletişim Bilgileri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">İletişim Bilgileri</h3>
+    </div>
+    @{
+        int count = 0;
+    }
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Konum</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Açıklama</th>
+            
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>
+                    <td>@item.Location</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@(item.FooterDescription.Length>50 ? item.FooterDescription.Substring(0,50) : item.FooterDescription)</td>
+                  
+                    <td>
+                        <a asp-controller="AdminContact" asp-action="Delete" asp-route-id="@item.ContactId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="AdminContact" asp-action="Update" asp-route-id="@item.ContactId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="AdminContact" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni İletişim Bilgisi</a>
+    </div>
+
+
+</div>
+

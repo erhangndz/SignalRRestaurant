@@ -1,0 +1,22 @@
+﻿@model CreateFeatureDto
+@{
+    ViewData["Title"] = "Yeni Öne Çıkan Bilgisi Oluştur";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Öne Çıkan Bilgisi Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <label>Başlık</label>
+            <input type="text" asp-for="Title" class="form-control" />
+            <br />
+            <label>Açıklama</label>
+            <textarea type="text" asp-for="Description" class="form-control" rows="5"></textarea>
+            <br />
+            <button type="submit" class="btn btn-outline-primary btn-round">Kaydet</button>
+        </form>
+    </div>
+</div>

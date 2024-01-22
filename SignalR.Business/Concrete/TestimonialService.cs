@@ -24,9 +24,19 @@ namespace SignalR.Business.Concrete
             _testimonialRepository.Add(entity);
         }
 
+        public int TCount()
+        {
+            return _testimonialRepository.Count();
+        }
+
         public void TDelete(int id)
         {
             _testimonialRepository.Delete(id);
+        }
+
+        public int TFilterCount(Expression<Func<Testimonial, bool>> predicate)
+        {
+            return _testimonialRepository.FilterCount(predicate);
         }
 
         public List<Testimonial> TGetAll()

@@ -19,14 +19,25 @@ namespace SignalR.Business.Concrete
             _categoryRepository = categoryRepository;
         }
 
+
         public void TAdd(Category entity)
         {
             _categoryRepository.Add(entity);
         }
 
+        public int TCount()
+        {
+          return _categoryRepository.Count();
+        }
+
         public void TDelete(int id)
         {
            _categoryRepository.Delete(id);
+        }
+
+        public int TFilterCount(Expression<Func<Category, bool>> predicate)
+        {
+            return _categoryRepository.FilterCount(predicate);
         }
 
         public List<Category> TGetAll()

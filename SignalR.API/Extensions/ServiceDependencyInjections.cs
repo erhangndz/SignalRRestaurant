@@ -1,4 +1,5 @@
-﻿using SignalR.Business.Concrete;
+﻿using SignalR.API.Hubs;
+using SignalR.Business.Concrete;
 using SignalR.Business.Interfaces;
 using SignalR.DataAccess.Interfaces;
 using SignalR.DataAccess.Repositories;
@@ -22,6 +23,7 @@ namespace SignalR.API.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
             services.AddScoped<ITestimonialService, TestimonialService>();
+            
         }
 
 

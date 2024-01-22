@@ -5,6 +5,8 @@ using SignalR.DTO.Dtos.CategoryDtos;
 using SignalR.DTO.Dtos.ContactDtos;
 using SignalR.DTO.Dtos.DiscountDtos;
 using SignalR.DTO.Dtos.FeatureDtos;
+using SignalR.DTO.Dtos.OrderDetailDtos;
+using SignalR.DTO.Dtos.OrderDtos;
 using SignalR.DTO.Dtos.ProductDtos;
 using SignalR.DTO.Dtos.SocialMediaDtos;
 using SignalR.DTO.Dtos.TestimonialDtos;
@@ -53,6 +55,15 @@ namespace SignalR.API.Mapping
             CreateMap<CreateTestimonialDto, Testimonial>().ReverseMap();
             CreateMap<UpdateTestimonialDto, Testimonial>().ReverseMap();
             CreateMap<ResultTestimonialDto, Testimonial>().ReverseMap();
+
+
+            CreateMap<ResultOrderDto,Order>().ReverseMap();
+            CreateMap<CreateOrderDto,Order>().ReverseMap();
+            CreateMap<UpdateOrderDto,Order>().ReverseMap();
+
+            CreateMap<ResultOrderDetailDto, OrderDetail>().ReverseMap();
+            CreateMap<CreateOrderDetailDto, OrderDetail>().ReverseMap();
+            CreateMap<UpdateOrderDetailDto, OrderDetail>().ReverseMap();
         }
     }
 }

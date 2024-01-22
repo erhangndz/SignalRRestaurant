@@ -1,0 +1,31 @@
+﻿@model CreateTestimonialDto
+@{
+    ViewData["Title"] = "Yeni Referans Oluştur";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Referans Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <label>Ad Soyad</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <br />
+            <label>Resim URL</label>
+            <input type="text" asp-for="ImageUrl" class="form-control" />
+            <br />
+            <label>Unvan</label>
+            <input type="text" asp-for="Title" class="form-control" />
+            <br />
+            <label>Yorum</label>
+            <textarea type="text" asp-for="Comment" class="form-control" rows="5" ></textarea>
+            <br />
+
+            <button type="submit" class="btn btn-outline-primary btn-round">Kaydet</button>
+        </form>
+    </div>
+</div>
+

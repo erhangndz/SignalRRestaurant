@@ -59,5 +59,27 @@ namespace SignalR.API.Controllers
             var value = _categoryService.TGetById(id);
             return Ok(value);
         }
+
+
+        [HttpGet("Count")]
+        public IActionResult Count()
+        {
+            var value = _categoryService.TCount();
+            return Ok(value);
+        }
+
+        [HttpGet("getactives")]
+        public IActionResult GetActives()
+        {
+            var value = _categoryService.TFilterCount(x => x.Status == true);
+            return Ok(value);
+        }
+
+        [HttpGet("getpassives")]
+        public IActionResult GetPassives()
+        {
+            var value = _categoryService.TFilterCount(x => x.Status == false);
+            return Ok(value);
+        }
     }
 }

@@ -68,5 +68,72 @@ namespace SignalR.API.Controllers
             var value = _productService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("Count")]
+        public IActionResult Count()
+        {
+            var value = _productService.TCount();
+            return Ok(value);
+        }
+
+
+        [HttpGet("getactives")]
+        public IActionResult GetActives()
+        {
+            var value = _productService.TFilterCount(x => x.Status == true);
+            return Ok(value);
+        }
+
+        [HttpGet("getpassives")]
+        public IActionResult GetPassives()
+        {
+            var value = _productService.TFilterCount(x => x.Status == false);
+            return Ok(value);
+        }
+
+        [HttpGet("CountByHamburger")]
+        public IActionResult CountByHamburger()
+        {
+            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLowerInvariant() == "hamburger");
+            return Ok(value);
+        }
+
+        [HttpGet("CountByDrink")]
+        public IActionResult CountBydrink()
+        {
+            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLowerInvariant() == "içecek");
+            return Ok(value);
+        }
+
+        [HttpGet("AvgPrice")]
+        public IActionResult AvgPrice()
+        {
+            var value = _productService.AvgProductPrice();
+            return Ok(value);
+        }
+
+        [HttpGet("Cheapest")]
+        public IActionResult Cheapest()
+        {
+            var value = _productService.CheapestProduct();
+            return Ok(value);
+        }
+
+
+        [HttpGet("MostExpensive")]
+        public IActionResult MostExpensive()
+        {
+            var value = _productService.MostExpensiveProduct();
+            return Ok(value);
+        }
+
+        [HttpGet("AvgHamburgerPrice")]
+        public IActionResult AvgHamburgerPrice()
+        {
+            var value = _productService.AvgHamburgerPrice();
+            return Ok(value);
+        }
+
+
     }
 }

@@ -12,5 +12,12 @@ namespace SignalR.Business.Interfaces
     {
 
         List<ResultProductWithCategoryDto> GetProductsWithCategories();
+
+        double AvgProductPrice();
+
+        double AvgHamburgerPrice();
+
+        string MostExpensiveProduct();
+        string CheapestProduct();
     }
 }

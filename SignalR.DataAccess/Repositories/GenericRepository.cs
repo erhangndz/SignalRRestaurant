@@ -24,11 +24,21 @@ namespace SignalR.DataAccess.Repositories
             _context.SaveChanges();
         }
 
+        public int Count()
+        {
+           return _context.Set<T>().Count();
+        }
+
         public void Delete(int id)
         {
             var value = _context.Set<T>().Find(id);
             _context.Remove<T>(value);
             _context.SaveChanges();
+        }
+
+        public int FilterCount(Expression<Func<T, bool>> predicate)
+        {
+           return _context.Set<T>().Where(predicate).Count();
         }
 
         public List<T> GetAll()

@@ -24,9 +24,19 @@ namespace SignalR.Business.Concrete
             _socialMediaRepository.Add(entity);
         }
 
+        public int TCount()
+        {
+          return _socialMediaRepository.Count();
+        }
+
         public void TDelete(int id)
         {
             _socialMediaRepository.Delete(id);
+        }
+
+        public int TFilterCount(Expression<Func<SocialMedia, bool>> predicate)
+        {
+            return _socialMediaRepository.FilterCount(predicate);
         }
 
         public List<SocialMedia> TGetAll()

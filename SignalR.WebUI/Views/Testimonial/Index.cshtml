@@ -1,0 +1,47 @@
+﻿@model List<ResultTestimonialDto>
+@{
+    ViewData["Title"] = "Referanslar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Referanslar</h3>
+    </div>
+    @{
+        int count = 0;
+    }
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Ad Soyad</th>
+                <th>Unvan</th>
+                <th>Yorum</th>
+                <th>Durum</th>
+
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>
+                    <td><img src="@item.ImageUrl" style="width:75px;height:75px;border-radius:50%" />  @item.Name</td>
+                    <td>@item.Title</td>
+                    <td>@(item.Comment.Length > 50 ? item.Comment.Substring(0, 50) + "..." : item.Comment)</td>
+                    <td>@(item.Status ? "Aktif" : "Pasif")</td>
+
+                    <td>
+                        <a asp-controller="Testimonial" asp-action="Delete" asp-route-id="@item.TestimonialId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="Testimonial" asp-action="Update" asp-route-id="@item.TestimonialId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="Testimonial" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Referans</a>
+    </div>
+
+
+
+

@@ -18,9 +18,19 @@ namespace SignalR.Business.Concrete
             _repository = repository;
         }
 
+        public int TFilterCount(Expression<Func<T, bool>> predicate)
+        {
+           return _repository.FilterCount(predicate);
+        }
+
         public void TAdd(T entity)
         {
             _repository.Add(entity);
+        }
+
+        public int TCount()
+        {
+          return _repository.Count();
         }
 
         public void TDelete(int id)

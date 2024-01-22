@@ -15,6 +15,8 @@ namespace SignalR.DataAccess.Interfaces
         T GetById(int id);
         List<T> GetAll();
         List<T> GetFilteredList(Expression<Func<T, bool>> predicate);
+        int Count();
+        int FilterCount(Expression<Func<T, bool>> predicate);
 
     }
 }

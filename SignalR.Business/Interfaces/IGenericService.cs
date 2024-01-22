@@ -15,5 +15,8 @@ namespace SignalR.Business.Interfaces
         T TGetById(int id);
         List<T> TGetAll();
         List<T> TGetFilteredList(Expression<Func<T, bool>> predicate);
+        int TCount();
+
+        int TFilterCount(Expression<Func<T, bool>> predicate);
     }
 }

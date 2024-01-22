@@ -24,9 +24,19 @@ namespace SignalR.Business.Concrete
             _bookingRepository.Add(entity);
         }
 
+        public int TCount()
+        {
+            return _bookingRepository.Count();
+        }
+
         public void TDelete(int id)
         {
             _bookingRepository.Delete(id);
+        }
+
+        public int TFilterCount(Expression<Func<Booking, bool>> predicate)
+        {
+           return _bookingRepository.FilterCount(predicate);
         }
 
         public List<Booking> TGetAll()

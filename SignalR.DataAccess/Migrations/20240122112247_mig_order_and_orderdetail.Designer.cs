@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SignalR.DataAccess.Concrete;
 
@@ -11,9 +12,11 @@ using SignalR.DataAccess.Concrete;
 namespace SignalR.DataAccess.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240122112247_mig_order_and_orderdetail")]
+    partial class mig_order_and_orderdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("AboutId");
 
-                    b.ToTable("Abouts", (string)null);
+                    b.ToTable("Abouts");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Booking", b =>
@@ -75,7 +78,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.ToTable("Bookings", (string)null);
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Category", b =>
@@ -95,7 +98,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Contact", b =>
@@ -124,7 +127,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("ContactId");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Discount", b =>
@@ -152,7 +155,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("DiscountId");
 
-                    b.ToTable("Discounts", (string)null);
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Feature", b =>
@@ -173,7 +176,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("FeatureId");
 
-                    b.ToTable("Features", (string)null);
+                    b.ToTable("Features");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Order", b =>
@@ -200,7 +203,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.OrderDetail", b =>
@@ -229,7 +232,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Product", b =>
@@ -265,7 +268,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.SocialMedia", b =>
@@ -290,7 +293,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("SocialMediaId");
 
-                    b.ToTable("SocialMedias", (string)null);
+                    b.ToTable("SocialMedias");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Testimonial", b =>
@@ -322,7 +325,7 @@ namespace SignalR.DataAccess.Migrations
 
                     b.HasKey("TestimonialId");
 
-                    b.ToTable("Testimonials", (string)null);
+                    b.ToTable("Testimonials");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.OrderDetail", b =>

@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Interfaces
 {
-    public interface ICategoryService: IGenericService<Category>
+    public interface IOrderDetailService:IGenericService<OrderDetail>
     {
-
-       
     }
 }

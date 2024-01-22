@@ -26,9 +26,19 @@ namespace SignalR.Business.Concrete
             _aboutRepository.Add(entity);
         }
 
+        public int TCount()
+        {
+          return _aboutRepository.Count();
+        }
+
         public void TDelete(int id)
         {
             _aboutRepository.Delete(id);
+        }
+
+        public int TFilterCount(Expression<Func<About, bool>> predicate)
+        {
+            return _aboutRepository.FilterCount(predicate);
         }
 
         public List<About> TGetAll()

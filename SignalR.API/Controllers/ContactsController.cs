@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class ContactsController(IContactService _contactService, IMapper _mapper) : ControllerBase
     {
-        private readonly IContactService _contactService;
-        private readonly IMapper _mapper;
-
-        public ContactsController(IContactService contactService, IMapper mapper)
-        {
-            _contactService = contactService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

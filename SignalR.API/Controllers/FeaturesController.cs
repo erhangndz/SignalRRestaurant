@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeaturesController : ControllerBase
+    public class FeaturesController(IFeatureService _featureService, IMapper _mapper) : ControllerBase
     {
-        private readonly IFeatureService _featureService;
-        private readonly IMapper _mapper;
-
-        public FeaturesController(IFeatureService featureService, IMapper mapper)
-        {
-            _featureService = featureService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

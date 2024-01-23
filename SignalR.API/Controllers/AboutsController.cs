@@ -10,16 +10,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AboutsController : ControllerBase
+    public class AboutsController(IAboutService _aboutService,IMapper _mapper) : ControllerBase
     {
-        private readonly IAboutService _aboutService;
-        private readonly IMapper _mapper;
-
-        public AboutsController(IAboutService aboutService, IMapper mapper)
-        {
-            _aboutService = aboutService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

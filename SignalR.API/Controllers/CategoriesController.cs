@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController(ICategoryService _categoryService,IMapper _mapper) : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
-
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
-        {
-            _categoryService = categoryService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

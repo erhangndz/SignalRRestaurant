@@ -9,16 +9,9 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingsController : ControllerBase
+    public class BookingsController(IBookingService _bookingsService,IMapper _mapper) : ControllerBase
     {
-        private readonly IBookingService _bookingsService;
-        private readonly IMapper _mapper;
-
-        public BookingsController(IBookingService bookingsService, IMapper mapper)
-        {
-            _bookingsService = bookingsService;
-            _mapper = mapper;
-        }
+      
 
         [HttpGet]
         public IActionResult GetAll()

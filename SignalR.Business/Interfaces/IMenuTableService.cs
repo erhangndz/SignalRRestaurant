@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Interfaces
 {
-    public interface IOrderService:IGenericService<Order>
+    public interface IMenuTableService:IGenericService<MenuTable>
     {
-
-        decimal LastOrderPrice();
-
-        decimal TodaysTotalPrice();
     }
 }

@@ -23,6 +23,10 @@ namespace SignalR.API.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISocialMediaService, SocialMediaService>();
             services.AddScoped<ITestimonialService, TestimonialService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderDetailService, OrderDetailService>();
+            services.AddScoped<ICashBoxService, CashBoxService>();
+            services.AddScoped<IMenuTableService, MenuTableService>();
             
         }
 

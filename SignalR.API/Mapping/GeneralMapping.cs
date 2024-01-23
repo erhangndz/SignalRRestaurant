@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using SignalR.DTO.Dtos.AboutDtos;
 using SignalR.DTO.Dtos.BookingDtos;
+using SignalR.DTO.Dtos.CashBoxDtos;
 using SignalR.DTO.Dtos.CategoryDtos;
 using SignalR.DTO.Dtos.ContactDtos;
 using SignalR.DTO.Dtos.DiscountDtos;
 using SignalR.DTO.Dtos.FeatureDtos;
+using SignalR.DTO.Dtos.MenuTableDtos;
 using SignalR.DTO.Dtos.OrderDetailDtos;
 using SignalR.DTO.Dtos.OrderDtos;
 using SignalR.DTO.Dtos.ProductDtos;
@@ -64,6 +66,15 @@ namespace SignalR.API.Mapping
             CreateMap<ResultOrderDetailDto, OrderDetail>().ReverseMap();
             CreateMap<CreateOrderDetailDto, OrderDetail>().ReverseMap();
             CreateMap<UpdateOrderDetailDto, OrderDetail>().ReverseMap();
+
+            CreateMap<CreateCashBoxDto,CashBox>().ReverseMap(); 
+            CreateMap<UpdateCashBoxDto,CashBox>().ReverseMap(); 
+            CreateMap<ResultCashBoxDto,CashBox>().ReverseMap(); 
+
+
+            CreateMap<CreateMenuTableDto, MenuTable>().ReverseMap();
+            CreateMap<UpdateMenuTableDto, MenuTable>().ReverseMap();
+            CreateMap<ResultMenuTableDto, MenuTable>().ReverseMap();
         }
     }
 }

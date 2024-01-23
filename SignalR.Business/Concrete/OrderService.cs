@@ -1,4 +1,5 @@
 ﻿using SignalR.Business.Interfaces;
+using SignalR.DataAccess.Concrete;
 using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;
@@ -10,13 +11,12 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class OrderService : IOrderService
+    public class OrderService(IRepository<Order> _orderRepository, SignalRContext _context) : IOrderService
     {
-        private readonly IRepository<Order> _orderRepository;
-
-        public OrderService(IRepository<Order> orderRepository)
+        
+        public decimal LastOrderPrice()
         {
-            _orderRepository = orderRepository;
+           return _context.Orders.OrderByDescending(x=>x.OrderDate).Select(x=>x.TotalPrice).FirstOrDefault();
         }
 
         public void TAdd(Order entity)
@@ -52,6 +52,11 @@ namespace SignalR.Business.Concrete
         public List<Order> TGetFilteredList(Expression<Func<Order, bool>> predicate)
         {
             return _orderRepository.GetFilteredList(predicate);
+        }
+
+        public decimal TodaysTotalPrice()
+        {
+           return _context.Orders.Where(x => x.OrderDate.Date == DateTime.Today).Sum(x => x.TotalPrice);
         }
 
         public void TUpdate(Order entity)

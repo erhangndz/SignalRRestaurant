@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TestimonialsController : ControllerBase
+    public class TestimonialsController(ITestimonialService _testimonialService, IMapper _mapper) : ControllerBase
     {
-        private readonly ITestimonialService _testimonialService;
-        private readonly IMapper _mapper;
-
-        public TestimonialsController(ITestimonialService testimonialService, IMapper mapper)
-        {
-            _testimonialService = testimonialService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SocialMediasController : ControllerBase
+    public class SocialMediasController(ISocialMediaService _socialMediaService, IMapper _mapper) : ControllerBase
     {
-        private readonly ISocialMediaService _socialMediaService;
-        private readonly IMapper _mapper;
-
-        public SocialMediasController(ISocialMediaService socialMediaService, IMapper mapper)
-        {
-            _socialMediaService = socialMediaService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()

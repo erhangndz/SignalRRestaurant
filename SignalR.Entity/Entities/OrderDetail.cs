@@ -13,7 +13,7 @@ namespace SignalR.Entity.Entities
         public Product Product { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-        public decimal TotalPrice { get=> Quantity * UnitPrice; }
+        public decimal TotalPrice { get { return Quantity * UnitPrice; } set { } }
         public int OrderId { get; set; }
         public Order Order { get; set; }
     }

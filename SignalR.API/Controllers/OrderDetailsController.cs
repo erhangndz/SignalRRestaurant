@@ -10,16 +10,9 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderDetailsController : ControllerBase
+    public class OrderDetailsController(IOrderDetailService _orderDetailService, IMapper _mapper) : ControllerBase
     {
-        private readonly IOrderDetailService _orderDetailService;
-        private readonly IMapper _mapper;
-
-        public OrderDetailsController(IOrderDetailService orderDetailService, IMapper mapper)
-        {
-            _orderDetailService = orderDetailService;
-            _mapper = mapper;
-        }
+        
 
         [HttpGet]
         public IActionResult GetAll()

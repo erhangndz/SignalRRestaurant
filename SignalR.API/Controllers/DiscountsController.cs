@@ -11,16 +11,9 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DiscountsController : ControllerBase
+    public class DiscountsController(IDiscountService _discountService, IMapper _mapper) : ControllerBase
     {
-        private readonly IDiscountService _discountService;
-        private readonly IMapper _mapper;
-
-        public DiscountsController(IDiscountService discountService, IMapper mapper)
-        {
-            _discountService = discountService;
-            _mapper = mapper;
-        }
+        
 
         [HttpGet]
         public IActionResult GetAll()

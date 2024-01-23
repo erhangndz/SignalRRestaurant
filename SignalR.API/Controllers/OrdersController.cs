@@ -11,16 +11,8 @@ namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrdersController(IOrderService _orderService,IMapper _mapper) : ControllerBase
     {
-        private readonly IOrderService _orderService;
-        private readonly IMapper _mapper;
-
-        public OrdersController(IOrderService orderService, IMapper mapper)
-        {
-            _orderService = orderService;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         public IActionResult GetAll()
@@ -57,6 +49,34 @@ namespace SignalR.API.Controllers
             var order = _mapper.Map<Order>(updateOrderDto);
             _orderService.TUpdate(order);
             return Ok("Sipariş başarıyla güncellendi");
+        }
+
+        [HttpGet("Count")]
+        public IActionResult Count()
+        {
+            var value = _orderService.TCount();
+            return Ok(value);
+        }
+
+        [HttpGet("activeorders")]
+        public IActionResult ActiveOrders()
+        {
+            var value = _orderService.TFilterCount(x=>x.Description=="Müşteri Masada");
+            return Ok(value);
+        }
+
+        [HttpGet("lastorderprice")]
+        public IActionResult LastOrderPrice()
+        {
+            var value = _orderService.LastOrderPrice();
+            return Ok(value);
+        }
+
+        [HttpGet("TodayTotalPrice")]
+        public IActionResult TodayTotalPrice()
+        {
+            var value = _orderService.TodaysTotalPrice();
+            return Ok(value);
         }
     }
 }

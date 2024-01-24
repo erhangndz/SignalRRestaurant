@@ -8,6 +8,7 @@ builder.Services.AddHttpClient("client", opt =>
     opt.BaseAddress = new Uri("https://localhost:7135/api/");
     
 });
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

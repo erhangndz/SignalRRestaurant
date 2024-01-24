@@ -86,14 +86,14 @@ namespace SignalR.API.Controllers
         [HttpGet("CountByHamburger")]
         public IActionResult CountByHamburger()
         {
-            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLowerInvariant() == "hamburger");
+            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "hamburger");
             return Ok(value);
         }
 
         [HttpGet("CountByDrink")]
         public IActionResult CountBydrink()
         {
-            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLowerInvariant() == "içecek");
+            var value = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "içecek");
             return Ok(value);
         }
 

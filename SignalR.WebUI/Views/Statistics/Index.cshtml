@@ -3,8 +3,68 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
 <div class="container-fluid">
-    <h4 class="page-title">İstatistikler</h4>
+
+    <script type="text/javascript">
+
+        $(document).ready(() => {
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7135/SignalRHub").build();
+
+            $("#connstatus").text(connection.state);
+
+
+            connection.start().then(() => {
+                $("#connstatus").text(connection.state);
+
+                setInterval(() => {
+                    connection.invoke("SendCategoryCount");
+                    connection.invoke("SendProductCount");
+                    connection.invoke("ActiveCategoryCount");
+                }, 1000);
+
+               
+
+            }).catch((err) => {
+                console.log(err)
+            });
+
+
+
+            connection.on("ReceiveCategoryCount", (categoryCount) => {
+
+                $("#categorycount").text(categoryCount);
+
+            });
+
+            connection.on("ReceiveProductCount", (productCount) => {
+
+                $("#productcount").text(productCount);
+
+            });
+            connection.on("ReceiveActiveCategoryCount", (activeCategories) => {
+
+                $("#activeCategories").text(activeCategories);
+
+            });
+
+
+
+
+        });
+
+
+
+
+    </script>
+
+
+
+    <h4 class="page-title">Anlık İstatistikler</h4>
     <div class="row">
         <div class="col-md-3">
             <div class="card card-stats card-warning">
@@ -12,13 +72,17 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-users"></i>
+                                <i class="la la-list"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Kategori Sayısı</p>
-                                <h4 class="card-title">@ViewBag.category</h4>
+                                <h4 class="card-title" id="categorycount">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -31,13 +95,17 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-bar-chart"></i>
+                                <i class="la la-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Sales</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <p class="card-category">Ürün Sayısı</p>
+                                <h4 class="card-title" id="productcount">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -55,8 +123,12 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Subscribers</p>
-                                <h4 class="card-title">1303</h4>
+                                <p class="card-category">Aktif Kategoriler</p>
+                                <h4 class="card-title" id="activeCategories">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -75,7 +147,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Order</p>
-                                <h4 class="card-title">576</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -94,7 +170,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Number</p>
-                                <h4 class="card-title">150GB</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -113,7 +193,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Revenue</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -132,7 +216,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Errors</p>
-                                <h4 class="card-title">23</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -151,7 +239,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Followers</p>
-                                <h4 class="card-title">+45K</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -164,13 +256,17 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-users"></i>
+                                <i class="la la-list"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Visitors</p>
-                                <h4 class="card-title">1,294</h4>
+                                <p class="card-category">Kategori Sayısı</p>
+                                <h4 class="card-title" id="categorycount">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -183,13 +279,17 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-bar-chart"></i>
+                                <i class="la la-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Sales</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <p class="card-category">Ürün Sayısı</p>
+                                <h4 class="card-title" id="productcount">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -207,8 +307,12 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Subscribers</p>
-                                <h4 class="card-title">1303</h4>
+                                <p class="card-category">Aktif Kategoriler</p>
+                                <h4 class="card-title" id="activeCategories">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -227,7 +331,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Order</p>
-                                <h4 class="card-title">576</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -246,7 +354,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Number</p>
-                                <h4 class="card-title">150GB</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -265,7 +377,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Revenue</p>
-                                <h4 class="card-title">$ 1,345</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -284,7 +400,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Errors</p>
-                                <h4 class="card-title">23</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -303,7 +423,11 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Followers</p>
-                                <h4 class="card-title">+45K</h4>
+                                <h4 class="card-title">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
                             </div>
                         </div>
                     </div>

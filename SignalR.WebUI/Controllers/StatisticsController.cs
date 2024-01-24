@@ -29,6 +29,7 @@ namespace SignalR.WebUI.Controllers
             ViewBag.activeOrders = await _client.GetStringAsync("orders/activeorders");
             ViewBag.lastOrderPrice = await _client.GetStringAsync("orders/lastorderprice");
             ViewBag.totalCashBox = await _client.GetStringAsync("cashboxes/total");
+            ViewBag.tableCount = await _client.GetStringAsync("menutables/count");
 
             return View();
         }

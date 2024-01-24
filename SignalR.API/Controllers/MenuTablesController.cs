@@ -48,5 +48,12 @@ namespace SignalR.API.Controllers
             var value = _menuTableService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("Count")]
+        public IActionResult Count()
+        {
+            var value = _menuTableService.TCount();
+            return Ok(value);
+        }
     }
 }

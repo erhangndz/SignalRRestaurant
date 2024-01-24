@@ -16,23 +16,31 @@ namespace SignalR.API.Hubs
             _productService = productService;
         }
 
-        public async Task SendCategoryCount()
+        public async Task SendStatistics()
         {
             var categoryCount = _categoryService.TCount();
             await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
-        }
-
-        public async Task SendProductCount()
-        {
             var productCount = _productService.TCount();
             await Clients.All.SendAsync("ReceiveProductCount", productCount);
+            var activeCategories = _categoryService.TFilterCount(x => x.Status == true);
+            await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategories);
+            var passiveCategories = _categoryService.TFilterCount(x => x.Status == false);
+            await Clients.All.SendAsync("ReceivePassiveCategoryCount", passiveCategories);
+            var hamburgerCount = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "hamburger");
+            await Clients.All.SendAsync("ReceiveHamburgerCount", hamburgerCount);
+            var drinkCount = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "içecek");
+            await Clients.All.SendAsync("ReceiveDrinkCount", drinkCount);
+            var avgPrice = _productService.AvgProductPrice();
+            await Clients.All.SendAsync("ReceiveAvgPrice", avgPrice.ToString("00.00")+" ₺");
+            var expensiveProduct = _productService.MostExpensiveProduct();
+            await Clients.All.SendAsync("ReceiveExpensiveProduct", expensiveProduct);
+            var cheapestProduct = _productService.CheapestProduct();
+            await Clients.All.SendAsync("ReceiveCheapestProduct", cheapestProduct);
+            var avgHamburgerPrice = _productService.AvgHamburgerPrice();
+            await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("00.00")+" ₺");
         }
 
-        public async Task ActiveCategoryCount()
-        {
-            var activeCategories = _categoryService.TFilterCount(x=>x.Status==true);
-            await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategories);
-        }
+        
 
     }
 }

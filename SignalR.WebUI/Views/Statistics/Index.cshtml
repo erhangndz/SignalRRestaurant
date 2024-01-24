@@ -22,9 +22,7 @@
                 $("#connstatus").text(connection.state);
 
                 setInterval(() => {
-                    connection.invoke("SendCategoryCount");
-                    connection.invoke("SendProductCount");
-                    connection.invoke("ActiveCategoryCount");
+                    connection.invoke("SendStatistics");
                 }, 1000);
 
                
@@ -49,6 +47,41 @@
             connection.on("ReceiveActiveCategoryCount", (activeCategories) => {
 
                 $("#activeCategories").text(activeCategories);
+
+            });
+            connection.on("ReceivePassiveCategoryCount", (activeCategories) => {
+
+                $("#passiveCategories").text(activeCategories);
+
+            });
+            connection.on("ReceiveHamburgerCount", (hamburgerCount) => {
+
+                $("#hamburgerCount").text(hamburgerCount);
+
+            });
+            connection.on("ReceiveDrinkCount", (drinkCount) => {
+
+                $("#drinkCount").text(drinkCount);
+
+            });
+            connection.on("ReceiveAvgPrice", (avgPrice) => {
+
+                $("#avgPrice").text(avgPrice);
+
+            });
+            connection.on("ReceiveExpensiveProduct", (expensiveProduct) => {
+
+                $("#expensiveProduct").text(expensiveProduct);
+
+            });
+            connection.on("ReceiveCheapestProduct", (cheapestProduct) => {
+
+                $("#cheapestProduct").text(cheapestProduct);
+
+            });
+            connection.on("ReceiveAvgHamburgerPrice", (avgHamburgerPrice) => {
+
+                $("#avgHamburgerPrice").text(avgHamburgerPrice);
 
             });
 
@@ -118,7 +151,7 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-newspaper-o"></i>
+                                <i class="la la-check-circle"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
@@ -141,13 +174,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-check-circle"></i>
+                                <i class="la la-close"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Order</p>
-                                <h4 class="card-title">
+                                <p class="card-category">Pasif Kategoriler</p>
+                                <h4 class="card-title" id="passiveCategories">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
@@ -164,13 +197,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center icon-warning">
-                                <i class="la la-pie-chart text-warning"></i>
+                                <i class="la la-delicious text-warning"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Number</p>
-                                <h4 class="card-title">
+                                <p class="card-category">Hamburger Türü</p>
+                                <h4 class="card-title" id="hamburgerCount">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
@@ -187,13 +220,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-bar-chart text-success"></i>
+                                <i class="la la-coffee text-success"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Revenue</p>
-                                <h4 class="card-title">
+                                <p class="card-category">İçecek Türü</p>
+                                <h4 class="card-title" id="drinkCount">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
@@ -210,17 +243,17 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-times-circle-o text-danger"></i>
+                                <i class="la la-money text-danger"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Errors</p>
-                                <h4 class="card-title">
+                                <p class="card-category">Ortalama Fiyat</p>
+                                <h4 class="card-title" id="avgPrice">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
-                                </h4>
+                                </h4> 
                             </div>
                         </div>
                     </div>
@@ -233,13 +266,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-heart-o text-primary"></i>
+                                <i class="la la-try text-primary"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Followers</p>
-                                <h4 class="card-title">
+                                <p class="card-category">En Pahalı Ürün</p>
+                                <h4 class="card-title" id="expensiveProduct">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
@@ -256,13 +289,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-list"></i>
+                                <i class="la la-arrow-circle-down"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Kategori Sayısı</p>
-                                <h4 class="card-title" id="categorycount">
+                                <p class="card-category">En Ucuz Ürün</p>
+                                <h4 class="card-title" id="cheapestProduct">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
@@ -279,13 +312,13 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="icon-big text-center">
-                                <i class="la la-shopping-cart"></i>
+                                <i class="la la-bar-chart"></i>
                             </div>
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Ürün Sayısı</p>
-                                <h4 class="card-title" id="productcount">
+                                <p class="card-category">Ort. Hamburger Fiyatı</p>
+                                <h4 class="card-title" id="avgHamburgerPrice">
                                     <div class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>

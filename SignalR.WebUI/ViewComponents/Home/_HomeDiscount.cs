@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.Dtos.DiscountDtos;
 
 namespace SignalR.WebUI.ViewComponents.Home
 {
-    public class _HomeDiscount:ViewComponent
+    public class _HomeDiscount(HttpClient client):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            client.BaseAddress = new Uri("https://localhost:7135/api/");
+            var features = await client.GetFromJsonAsync<List<ResultDiscountDto>>("discounts");
+            return View(features);
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+@await Component.InvokeAsync("_UIHead")
+
+<body>
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="~/feane-1.0.0/images/hero-bg.jpg" alt="">
+        </div>
+        <!-- navbar section starts -->
+       @await Component.InvokeAsync("_UINavbar")
+       <!--navbar section ends-->
+   
+
+
+    @RenderBody()
+        <!-- footer section starts -->
+     
+        @await Component.InvokeAsync("_UIScripts")
+        <!-- footer section ends -->
+</body>
+
+</html>

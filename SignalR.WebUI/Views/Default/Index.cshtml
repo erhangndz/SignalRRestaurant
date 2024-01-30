@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+
+<!-- slider section  -->
+@await Component.InvokeAsync("_HomeSlider")
+<!-- end slider section -->
+  </div>
+<!-- discount section -->
+@await Component.InvokeAsync("_HomeDiscount")
+<!-- end discount section -->
+<!-- menu section -->
+@await Component.InvokeAsync("_HomeMenu")
+<!-- end menu section -->
+<!-- about section -->
+@await Component.InvokeAsync("_HomeAbout")
+<!-- end about section -->
+<!-- book section -->
+@await Component.InvokeAsync("_HomeBook")
+<!-- end book section -->
+<!-- testimonial section -->
+@await Component.InvokeAsync("_HomeTestimonial")
+<!-- end testimonial section -->

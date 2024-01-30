@@ -59,6 +59,17 @@ namespace SignalR.API.Hubs
 
         }
 
+
+        public async Task SendProgress()
+        {
+            var totalCash = _cashBoxService.TotalCashBox();
+            await Clients.All.SendAsync("ReceiveTotalCash", totalCash.ToString("00.00")+" ₺");
+            var activeOrders = _orderService.TFilterCount(x => x.Description == "Müşteri Masada");
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrders);
+            var totalTableCount = _menuTableService.TCount();
+            await Clients.All.SendAsync("ReceiveTotalTableCount", totalTableCount);
+        }
+
         
 
     }

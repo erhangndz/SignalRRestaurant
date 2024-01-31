@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.Dtos.TestimonialDtos;
 
 namespace SignalR.WebUI.ViewComponents.Home
 {
-    public class _HomeTestimonial:ViewComponent
+    public class _HomeTestimonial(HttpClient client):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            client.BaseAddress = new Uri("https://localhost:7135/api/");
+            var testimonials = await client.GetFromJsonAsync<List<ResultTestimonialDto>>("testimonials");
+            return View(testimonials);
         }
     }
 }

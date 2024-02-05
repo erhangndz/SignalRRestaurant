@@ -18,8 +18,9 @@
 
 
     @RenderBody()
+
         <!-- footer section starts -->
-     
+        @await Component.InvokeAsync("_UIFooter")
         @await Component.InvokeAsync("_UIScripts")
         <!-- footer section ends -->
 </body>

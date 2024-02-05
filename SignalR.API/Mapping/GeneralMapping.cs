@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SignalR.DTO.Dtos.AboutDtos;
+using SignalR.DTO.Dtos.BasketDtos;
 using SignalR.DTO.Dtos.BookingDtos;
 using SignalR.DTO.Dtos.CashBoxDtos;
 using SignalR.DTO.Dtos.CategoryDtos;
@@ -75,6 +76,10 @@ namespace SignalR.API.Mapping
             CreateMap<CreateMenuTableDto, MenuTable>().ReverseMap();
             CreateMap<UpdateMenuTableDto, MenuTable>().ReverseMap();
             CreateMap<ResultMenuTableDto, MenuTable>().ReverseMap();
+
+
+            CreateMap<CreateBasketDto, Basket>().ReverseMap();
+            CreateMap<UpdateBasketDto, Basket>().ReverseMap();
         }
     }
 }

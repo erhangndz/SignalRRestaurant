@@ -26,5 +26,6 @@ namespace SignalR.DataAccess.Concrete
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<CashBox> CashBoxes { get; set; }
         public DbSet<MenuTable> MenuTables { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
     }
 }

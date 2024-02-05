@@ -1,0 +1,108 @@
+﻿@model List<ResultBasketDto>
+
+@{
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<body class="sub_page">
+
+    </div>
+    <br />
+    <br />
+    @{
+        int count = 0;
+    }
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+
+                    <a class="breadcrumb-item text-light" href="/Default/Index">Ana Sayfa</a>
+                    <a class="breadcrumb-item text-light" href="/Menu/Index">Menü</a>
+                    <span class="breadcrumb-item active">Sepetiniz</span>
+
+                </nav>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-8 table-responsive mb-5">
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Ürün Adı</th>
+                            <th>Adet</th>
+                            <th>Ürün Fiyatı</th>
+                            <th>Toplam Fiyat</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tbody class="align-middle">
+                            <tr>
+                                <td class="align-middle">@count</td>
+                                <td class="align-middle">@item.Product.ProductName</td>
+                                <td class="align-middle">@item.Quantity</td>
+                                <td class="align-middle">@item.Product.Price ₺</td>
+                                <td class="align-middle">@item.TotalPrice ₺</td>
+                                <td class="align-middle">
+                                    <a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-id="@item.ProductId" id="btnDeleteBasketId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+
+            <div class="col-4">
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="couponCode" class="form-control border-1 p-4" placeholder="Kupon Kodunuz" />
+                        <div>
+                            <button style="height:48px;padding-top:11px; margin-left:5px" class="btn bnt-sm btn-warning text-dark" id="btnCouponCode">Kuponu Uygula</button>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-uppercase mb-3">
+                            <span class="bg-warning pr-3 text-dark">Sepet Özetİ</span>
+                        </h5>
+
+                        <div class="bg-light p-30 mb-5">
+                            <div id="container" class="border-bottom pb-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6>Toplam Tutar :</h6>
+                                    <h6><span id="totalPrice">@(Model.Sum(x => x.TotalPrice)) ₺</span></h6>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="font-weight-medium">Kdv Oranı( %18 ) :</h6>
+                                    <h6 id="kdv" class="font-weight-medium">@((int)Model.Sum(x => x.TotalPrice) * 0.18) ₺</h6>
+                                </div>
+                                <br>
+                                <div class="pt-2">
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <h5>Ödenecek Tutar :</h5>
+                                        <h5><span id="totalPriceWithKdv">@((int)Model.Sum(x => x.TotalPrice) + (int)Model.Sum(x => x.TotalPrice) * 0.18) ₺</span></h5>
+                                    </div>
+                                </div>
+                                <br />
+                                <button id="btncheckout" class="btn btn-block btn-warning font-weight-bold my-3">Siparişi Tamamla</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>

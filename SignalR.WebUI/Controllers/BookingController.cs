@@ -39,12 +39,7 @@ namespace SignalR.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> BookTable(CreateBookingDto createBookingDto)
-        {
-            await _client.PostAsJsonAsync("bookings", createBookingDto);
-            return RedirectToAction("Index","Default");
-        }
+        
 
         public async Task<IActionResult> Update(int id)
         {

@@ -38,7 +38,7 @@ namespace SignalR.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult RemoveBasketItem(int id)
         {
-            basketService.RemoveBasketItem(id);
+            basketService.TDelete(id);
             return Ok("Sepetten Ürün Silindi");
         }
 

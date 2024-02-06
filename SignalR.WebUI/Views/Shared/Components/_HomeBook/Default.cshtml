@@ -1,4 +1,6 @@
-﻿<section class="book_section layout_padding">
+﻿<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="book_section layout_padding">
     <div class="container">
         <div class="heading_container">
             <h2>
@@ -8,7 +10,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container">
-                    <form method="post" asp-controller="Booking" asp-action="BookTable">
+                    <form method="post" asp-controller="BookATable" asp-action="BookTable">
                         <div>
                             <input type="text" class="form-control" name="Name" placeholder="Adınız Soyadınız" />
                         </div>
@@ -44,7 +46,7 @@
                             <input type="datetime-local" class="form-control" name="BookingDate">
                         </div>
                         <div class="btn_box">
-                            <button>
+                            <button onclick="bookATable()">
                                 Rezervasyon Yap
                             </button>
                         </div>
@@ -59,3 +61,21 @@
         </div>
     </div>
 </section>
+
+<script>
+    function bookATable() {
+        Swal.fire({
+
+            title: 'Tebrikler!',
+            text: 'Rezervasyon Bilgileriniz Alındı. Size en kısa sürede dönüş yapılacaktır.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Tamam',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Default/Index" // Yönlendirilecek URL'yi buraya yazın
+            }
+        });
+    }
+</script>

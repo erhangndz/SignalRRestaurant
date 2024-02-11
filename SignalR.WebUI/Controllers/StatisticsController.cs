@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 
 namespace SignalR.WebUI.Controllers
 {
     public class StatisticsController : Controller
     {
-        private readonly HttpClient _client;
-
-        public StatisticsController(HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = new Uri("https://localhost:7135/api/");
-        }
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
         public async Task<IActionResult> Index()
         {

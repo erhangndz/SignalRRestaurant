@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.CategoryDtos;
 using SignalR.WebUI.Dtos.ProductDtos;
 
@@ -7,15 +8,7 @@ namespace SignalR.WebUI.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly HttpClient _client;
-
-
-        public ProductController(HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = new Uri("https://localhost:7135/api/");
-
-        }
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
         public async Task<IActionResult> Index()
         {

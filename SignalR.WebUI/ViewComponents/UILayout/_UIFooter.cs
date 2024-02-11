@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.ContactDtos;
 using SignalR.WebUI.Dtos.SocialMediaDtos;
 
 namespace SignalR.WebUI.ViewComponents.UILayout
 {
-    public class _UIFooter(HttpClient client):ViewComponent
+    public class _UIFooter:ViewComponent
     {
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            client.BaseAddress=new Uri("https://localhost:7135/api/");
-            var values = await client.GetFromJsonAsync<List<ResultContactDto>>("contacts");
+           
+            var values = await _client.GetFromJsonAsync<List<ResultContactDto>>("contacts");
 
-            ViewBag.socialMedias = await client.GetFromJsonAsync<List<ResultSocialMediaDto>>("socialmedias");
+            ViewBag.socialMedias = await _client.GetFromJsonAsync<List<ResultSocialMediaDto>>("socialmedias");
             return View(values);
         }
     }

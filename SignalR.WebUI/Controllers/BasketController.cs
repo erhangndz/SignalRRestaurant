@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.BasketDtos;
 
 namespace SignalR.WebUI.Controllers
 {
-    public class BasketController(HttpClient client) : Controller
+    public class BasketController : Controller
     {
-        
+        private readonly HttpClient client = HttpClientInstance.CreateClient();
+
         public async Task<IActionResult> Index()
         {
-           client.BaseAddress= new Uri("https://localhost:7135/api/");
+          
             var values = await client.GetFromJsonAsync<List<ResultBasketDto>>("baskets/4" );
             return View(values);
         }
 
         public async Task<IActionResult> RemoveBasketItem(int id)
         {
-            client.BaseAddress = new Uri("https://localhost:7135/api/");
+            
             await client.DeleteAsync($"baskets/{id}");
             return RedirectToAction("Index");
         }
@@ -23,7 +25,7 @@ namespace SignalR.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToBasket(int id)
         {
-            client.BaseAddress = new Uri("https://localhost:7135/api/");
+            
             var createBasketDto = new CreateBasketDto();
             createBasketDto.ProductId = id;
             createBasketDto.MenuTableId = 4;

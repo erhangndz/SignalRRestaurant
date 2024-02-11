@@ -1,21 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.CategoryDtos;
 
 namespace SignalR.WebUI.Controllers
 {
 	public class CategoryController : Controller
 	{
-		private readonly HttpClient _client;
-		
+		private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
-		public CategoryController(HttpClient client)
-		{
-			_client = client;
-			_client.BaseAddress = new Uri("https://localhost:7135/api/");
-			
-		}
-
-		public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
 		{
 			var values = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
 			return View(values);

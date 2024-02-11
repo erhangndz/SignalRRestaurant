@@ -1,19 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.ContactDtos;
 
 namespace SignalR.WebUI.Controllers
 {
     public class AdminContactController : Controller
     {
-        private readonly HttpClient _client;
-
-
-        public AdminContactController(HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = new Uri("https://localhost:7135/api/");
-
-        }
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
         public async Task<IActionResult> Index()
         {

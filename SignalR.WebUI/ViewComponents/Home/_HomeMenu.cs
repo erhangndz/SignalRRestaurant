@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.CategoryDtos;
 using SignalR.WebUI.Dtos.ProductDtos;
 
 namespace SignalR.WebUI.ViewComponents.Home
 {
-    public class _HomeMenu(HttpClient client):ViewComponent
+    public class _HomeMenu:ViewComponent
     {
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            client.BaseAddress = new Uri("https://localhost:7135/api/");
-            var categories = await client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
-            var products = await client.GetFromJsonAsync<List<ResultProductDto>>("products/ProductListWithCategory");
+           
+            var categories = await _client.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
+            var products = await _client.GetFromJsonAsync<List<ResultProductDto>>("products/ProductListWithCategory");
 
             ViewBag.categories = categories;
             return View(products);

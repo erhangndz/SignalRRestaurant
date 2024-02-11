@@ -1,19 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.FeatureDtos;
 
 namespace SignalR.WebUI.Controllers
 {
     public class FeatureController : Controller
     {
-        private readonly HttpClient _client;
-
-
-        public FeatureController(HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = new Uri("https://localhost:7135/api/");
-
-        }
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
         public async Task<IActionResult> Index()
         {

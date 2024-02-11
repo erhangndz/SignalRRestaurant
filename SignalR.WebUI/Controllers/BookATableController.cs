@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.BookingDtos;
 
 namespace SignalR.WebUI.Controllers
 {
     public class BookATableController : Controller
     {
-        private readonly HttpClient _client;
-
-        public BookATableController(HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = new Uri("https://localhost:7135/api/");
-        }
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
 
         public IActionResult Index()
         {
@@ -21,6 +16,8 @@ namespace SignalR.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> BookTable(CreateBookingDto createBookingDto)
         {
+          
+
             await _client.PostAsJsonAsync("bookings", createBookingDto);
             return NoContent();
         }

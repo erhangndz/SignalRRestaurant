@@ -3,44 +3,106 @@
     ViewData["Title"] = "Rezervasyonlar";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Rezervasyonlar</h3>
-    </div>
-    @{
-        int count = 0;
-    }
-    <div class="card-body">
-        <table class="table table-hover table-bordered">
-            <tr>
-                <th>#</th>
-                <th>Ad Soyad</th>
-                <th>Telefon</th>
-                <th>Email</th>
-                <th>Kaç Kişilik</th>
-                <th>Tarih</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                count++;
-                <tr>
-                    <th>@count</th>
-                    <td>@item.Name</td>
-                    <td>@item.Phone</td>
-                    <td>@item.Email</td>
-                    <td>@item.PersonCount</td>
-                    <td>@item.BookingDate.ToShortDateString()</td>
-                    <td>
-                        <a asp-controller="Booking" asp-action="Delete" asp-route-id="@item.BookingId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
-                        <a asp-controller="Booking" asp-action="Update" asp-route-id="@item.BookingId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
-                    </td>
-                </tr>
-            }
-        </table>
-        <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Rezervasyon</a>
-    </div>
+<div class="container-fluid">
+    <script type="text/javascript">
 
+        $(document).ready(() => {
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7135/SignalRHub").build();
+
+            $("#connstatus").text(connection.state);
+
+
+            connection.start().then(() => {
+                $("#connstatus").text(connection.state);
+
+                setInterval(() => {
+                    connection.invoke("GetBookingList");
+                }, 1000);
+
+
+
+            }).catch((err) => {
+                console.log(err)
+            });
+
+
+
+            connection.on("ReceiveBookingList", (values) => {
+
+                console.log(values);
+                
+                let tablehtml = `<table class="table table-hover table-bordered" >
+                         <tr>
+                            <th>#</th>
+                            <th>Ad Soyad</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Kaç Kişilik</th>
+                            <th>Tarih</th>
+                            <th>Durum</th>
+                            <th></th>
+                        </tr>`
+
+                $.each(values, (index, item) => {
+                    tablehtml += ` <tr>
+                            <th>${item.bookingId}</th>
+                            <td>${item.name}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.email}</td>
+                            <td>${item.personCount}</td>
+                            <td>${item.bookingDate}</td>
+                            <td>Rezervasyon Alındı</td>
+                                     <td>
+                                            <a href="/Booking/Delete/${item.bookingId}" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                                                            <a href="/Booking/Update/${item.bookingId}" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                                </td>
+                            </tr>`
+                });
+
+                tablehtml += `</table>`;
+
+                $("#bookingList").html(tablehtml);
+
+            });
+
+
+
+
+
+
+        });
+
+
+
+
+    </script>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Rezervasyonlar</h3>
+        </div>
+        @{
+            int count = 0;
+        }
+        <div class="card-body">
+            <div id="bookingList">
+
+            </div>
+            <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Rezervasyon</a>
+
+
+            
+        </div>
+
+
+    </div>
 
 </div>
+
+
+

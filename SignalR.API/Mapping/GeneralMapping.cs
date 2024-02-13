@@ -8,6 +8,7 @@ using SignalR.DTO.Dtos.ContactDtos;
 using SignalR.DTO.Dtos.DiscountDtos;
 using SignalR.DTO.Dtos.FeatureDtos;
 using SignalR.DTO.Dtos.MenuTableDtos;
+using SignalR.DTO.Dtos.NotificationDtos;
 using SignalR.DTO.Dtos.OrderDetailDtos;
 using SignalR.DTO.Dtos.OrderDtos;
 using SignalR.DTO.Dtos.ProductDtos;
@@ -80,6 +81,9 @@ namespace SignalR.API.Mapping
 
             CreateMap<CreateBasketDto, Basket>().ReverseMap();
             CreateMap<UpdateBasketDto, Basket>().ReverseMap();
+
+            CreateMap<CreateNotificationDto, Notification>().ReverseMap();
+            CreateMap<UpdateNotificationDto, Notification>().ReverseMap();
         }
     }
 }

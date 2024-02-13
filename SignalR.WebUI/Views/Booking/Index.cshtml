@@ -35,33 +35,33 @@
             connection.on("ReceiveBookingList", (values) => {
 
                 console.log(values);
-                
+
                 let tablehtml = `<table class="table table-hover table-bordered" >
-                         <tr>
-                            <th>#</th>
-                            <th>Ad Soyad</th>
-                            <th>Telefon</th>
-                            <th>Email</th>
-                            <th>Kaç Kişilik</th>
-                            <th>Tarih</th>
-                            <th>Durum</th>
-                            <th></th>
-                        </tr>`
+                                 <tr>
+                                    <th>#</th>
+                                    <th>Ad Soyad</th>
+                                    <th>Telefon</th>
+                                    <th>Email</th>
+                                    <th>Kaç Kişilik</th>
+                                    <th>Tarih</th>
+                                    <th>Durum</th>
+                                    <th></th>
+                                </tr>`
 
                 $.each(values, (index, item) => {
                     tablehtml += ` <tr>
-                            <th>${item.bookingId}</th>
-                            <td>${item.name}</td>
-                            <td>${item.phone}</td>
-                            <td>${item.email}</td>
-                            <td>${item.personCount}</td>
-                            <td>${item.bookingDate}</td>
-                            <td>Rezervasyon Alındı</td>
-                                     <td>
-                                            <a href="/Booking/Delete/${item.bookingId}" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
-                                                            <a href="/Booking/Update/${item.bookingId}" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
-                                </td>
-                            </tr>`
+                                    <th>${item.bookingId}</th>
+                                    <td>${item.name}</td>
+                                    <td>${item.phone}</td>
+                                    <td>${item.email}</td>
+                                    <td>${item.personCount}</td>
+                                    <td>${item.bookingDate}</td>
+                                    <td>Rezervasyon Alındı</td>
+                                             <td>
+                                                    <a href="/Booking/Delete/${item.bookingId}" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                                                                    <a href="/Booking/Update/${item.bookingId}" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                                        </td>
+                                    </tr>`
                 });
 
                 tablehtml += `</table>`;
@@ -89,14 +89,52 @@
         @{
             int count = 0;
         }
-        <div class="card-body">
+        <div class="table table-hover">
             <div id="bookingList">
 
+                <table class="table table-bordered placeholder-glow col-12" aria-hidden="true">
+
+                   
+                        
+                        <tr>
+                            <th><span class="placeholder col-1"></span></th>
+                            <th><span class="placeholder col-8"></span></th>
+                            <th><span class="placeholder col-8"></span></th>
+                            <th><span class="placeholder col-8"></span></th>
+                            <th><span class="placeholder col-3"></span></th>
+                            <th><span class="placeholder col-8"></span></th>
+                            <th><span class="placeholder col-8"></span></th>
+
+                            <td>
+                                <button class="btn btn-outline-danger disabled placeholder col-2" aria-disabled="true"></button>
+                                <button class="btn btn-outline-info disabled placeholder col-2" aria-disabled="true"></button>
+                            </td>
+                        </tr>
+                        <p class="card-text placeholder-glow">
+                        <tr> 
+                            <td><span class="placeholder col-1"></span></td>
+                            <td><span class="placeholder col-8"></span></td>
+                            <td><span class="placeholder col-8"></span></td>
+                            <td><span class="placeholder col-8"></span></td>
+                            <td><span class="placeholder col-3"></span></td>
+                            <td><span class="placeholder col-8"></span></td>
+                            <td><span class="placeholder col-8"></span></td>
+
+                            <td>
+                                <button class="btn btn-outline-danger disabled placeholder col-2" aria-disabled="true"></button>
+                                <button class="btn btn-outline-info disabled placeholder col-2" aria-disabled="true"></button>
+                            </td>
+                        </tr>
+
+                        </p>
+
+                    </thead>
+                </table>
             </div>
             <a asp-controller="Booking" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Rezervasyon</a>
 
 
-            
+
         </div>
 
 

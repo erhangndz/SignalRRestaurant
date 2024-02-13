@@ -28,6 +28,7 @@ namespace SignalR.API.Extensions
             services.AddScoped<ICashBoxService, CashBoxService>();
             services.AddScoped<IMenuTableService, MenuTableService>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
            
             

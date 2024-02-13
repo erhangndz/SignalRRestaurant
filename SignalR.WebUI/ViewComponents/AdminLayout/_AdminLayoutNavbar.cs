@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SignalR.WebUI.ClientHandler;
+using SignalR.WebUI.Dtos.NotificationDtos;
 
 namespace SignalR.WebUI.ViewComponents.AdminLayout
 {
 	public class _AdminLayoutNavbar:ViewComponent
 	{
-		public IViewComponentResult Invoke()
+
+		private readonly HttpClient _httpClient = HttpClientInstance.CreateClient();
+
+
+		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			return View();
+			ViewBag.unread = await _httpClient.GetStringAsync("notifications/unreadcount");
+			var values =await _httpClient.GetFromJsonAsync<List<ResultNotificationDto>>("notifications/getunreadnotifications");
+			return View(values);
+
+			
 		}
 	}
 }

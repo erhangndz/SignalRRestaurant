@@ -12,7 +12,11 @@ namespace SignalR.Business.Concrete
 {
     public class NotificationService(IRepository<Notification> _notificationRepository) : INotificationService
     {
-        
+        public int ReadNotificationCount()
+        {
+          return  _notificationRepository.FilterCount(x => x.Status == true);
+        }
+
         public void TAdd(Notification entity)
         {
            _notificationRepository.Add(entity);
@@ -51,6 +55,11 @@ namespace SignalR.Business.Concrete
         public void TUpdate(Notification entity)
         {
             _notificationRepository.Update(entity);
+        }
+
+        public int UnreadNotificationCount()
+        {
+            return _notificationRepository.FilterCount(x => x.Status == false);
         }
     }
 }

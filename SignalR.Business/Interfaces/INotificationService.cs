@@ -9,6 +9,7 @@ namespace SignalR.Business.Interfaces
 {
     public interface INotificationService:IGenericService<Notification>
     {
-
+        int UnreadNotificationCount();
+        int ReadNotificationCount();
     }
 }

@@ -13,8 +13,9 @@ namespace SignalR.API.Hubs
         private readonly ICashBoxService _cashBoxService;
         private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, ICashBoxService cashBoxService, IMenuTableService menuTableService, IBookingService bookingService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, ICashBoxService cashBoxService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
             _categoryService = categoryService;
             _productService = productService;
@@ -22,6 +23,7 @@ namespace SignalR.API.Hubs
             _cashBoxService = cashBoxService;
             _menuTableService = menuTableService;
             _bookingService = bookingService;
+            _notificationService = notificationService;
         }
 
         public async Task SendStatistics()
@@ -78,7 +80,16 @@ namespace SignalR.API.Hubs
             await Clients.All.SendAsync("ReceiveBookingList", values);
         }
 
-        
+        public async Task SendNotifications()
+        {
+            var readNotifications = _notificationService.ReadNotificationCount();
+            await Clients.All.SendAsync("ReceiveReadNotifications", readNotifications);
+
+            var unreadNotifications = _notificationService.UnreadNotificationCount();
+            await Clients.All.SendAsync("ReceiveUnreadNotifications", unreadNotifications);
+
+			
+		}
 
     }
 }

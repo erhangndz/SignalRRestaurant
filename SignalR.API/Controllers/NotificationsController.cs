@@ -33,7 +33,6 @@ namespace SignalR.API.Controllers
         }
 
         [HttpPost]
-       
         public IActionResult CreateNotification(CreateNotificationDto createNotificationDto)
         {
             var newNotification = _mapper.Map<Notification>(createNotificationDto);
@@ -41,6 +40,47 @@ namespace SignalR.API.Controllers
             return Ok("Bildirim Oluşturuldu");
         }
 
-      
-    }
+        [HttpPut]
+        public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto)
+        {
+            var notification = _mapper.Map<Notification>(updateNotificationDto);
+            _notificationService.TUpdate(notification);
+            return Ok("Bildirim Güncellendi");
+        }
+
+        [HttpGet("UnreadNotificationCount")]
+        public IActionResult UnreadNotificationCount()
+        {
+            var value = _notificationService.UnreadNotificationCount();
+            return Ok(value);
+        }
+
+        [HttpGet("ReadNotificationCount")]
+        public IActionResult ReadNotificationCount()
+        {
+            var value = _notificationService.ReadNotificationCount();
+            return Ok(value);
+        }
+
+
+        [HttpGet("GetUnreadNotifications")]
+
+        public IActionResult GetUnreadNotifications()
+        {
+            var values = _notificationService.TGetFilteredList(x => x.Status == false);
+            return Ok(values);
+        }
+
+		[HttpGet("UnreadCount")]
+
+		public IActionResult UnreadCount()
+		{
+			var values = _notificationService.TFilterCount(x=>x.Status == false);
+			return Ok(values);
+		}
+
+
+
+
+	}
 }

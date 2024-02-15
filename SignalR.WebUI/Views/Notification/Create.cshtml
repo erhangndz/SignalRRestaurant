@@ -1,0 +1,45 @@
+﻿@model CreateNotificationDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Bildirim Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <label>Bildirim Rengi</label>
+            <select asp-for="Type" class="form-control">
+                <option>Rengi Seçiniz</option>
+                <option value="notif-primary">Mavi</option>
+                <option value="notif-danger">Kırmızı</option>
+                <option value="notif-success">Yeşil</option>
+                <option value="notif-info">Turkuaz</option>
+                <option value="notif-warning">Sarı</option>
+            </select>
+            <br />
+            <label>Açıklama</label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <br />
+            <label>Tarih</label>
+            <input type="datetime-local" asp-for="Date" class="form-control" />
+            <br />
+            <label>Okundu Olarak İşaretle ( Boş bırakılırsa okunmamış olarak kayıt edilecek)</label>
+            <input type="checkbox" asp-for="Status" />
+            <br />
+            <label>İkon</label>
+            <select asp-for="Icon" class="form-control">
+                <option>İkon Seçiniz</option>
+                <option value="la la-user-plus">Yeni Kişi</option>
+                <option value="la la-comment">Yeni Yorum</option>
+                <option value="la la-heart">Kalp</option>
+            </select>
+            <br />
+            <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+

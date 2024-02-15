@@ -11,5 +11,8 @@ namespace SignalR.Business.Interfaces
     {
         int UnreadNotificationCount();
         int ReadNotificationCount();
+
+        void MarkAsRead(int id);
+        void MarkAsUnread(int id);
     }
 }

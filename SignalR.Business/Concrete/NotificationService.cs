@@ -12,6 +12,20 @@ namespace SignalR.Business.Concrete
 {
     public class NotificationService(IRepository<Notification> _notificationRepository) : INotificationService
     {
+        public void MarkAsRead(int id)
+        {
+            var value = _notificationRepository.GetById(id);
+            value.Status = true;
+            _notificationRepository.Update(value);
+        }
+
+        public void MarkAsUnread(int id)
+        {
+            var value = _notificationRepository.GetById(id);
+            value.Status = false;
+            _notificationRepository.Update(value);
+        }
+
         public int ReadNotificationCount()
         {
           return  _notificationRepository.FilterCount(x => x.Status == true);

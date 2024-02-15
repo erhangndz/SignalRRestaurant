@@ -1,0 +1,47 @@
+﻿@model List<ResultNotificationDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Bildirimler</h3>
+    </div>
+    @{
+        int count = 0;
+    }
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Açıklama</th>
+                <th>Tarih</th>
+                <th>Durum</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>
+                    <td>@item.Description</td>
+                    <td>@item.Date.ToLongDateString()</td>
+                    <td>@(item.Status ? "Okundu" : "Okunmadı")</td>
+                    <td>
+                        <a asp-controller="Notification" asp-action="Delete" asp-route-id="@item.NotificationId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="Notification" asp-action="Update" asp-route-id="@item.NotificationId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i>  Güncelle</a>
+                        <a asp-controller="Notification" asp-action="MarkAsRead" asp-route-id="@item.NotificationId" class="btn btn-outline-primary btn-round"><i class="la la-comment"></i>  Okundu </a>
+                        <a asp-controller="Notification" asp-action="MarkAsUnread" asp-route-id="@item.NotificationId" class="btn btn-outline-dark btn-round"><i class="la la-comment"></i>  Okunmadı</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="Notification" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i>  Yeni Bildirim</a>
+    </div>
+
+
+</div>
+
+
+

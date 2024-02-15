@@ -12,9 +12,9 @@ namespace SignalR.WebUI.ViewComponents.AdminLayout
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			ViewBag.unread = await _httpClient.GetStringAsync("notifications/unreadcount");
-			var values =await _httpClient.GetFromJsonAsync<List<ResultNotificationDto>>("notifications/getunreadnotifications");
-			return View(values);
+			ViewBag.unread = await _httpClient.GetStringAsync("notifications/UnreadNotificationCount");
+			//var values =await _httpClient.GetFromJsonAsync<List<ResultNotificationDto>>("notifications/getunreadnotifications");
+			return View();
 
 			
 		}

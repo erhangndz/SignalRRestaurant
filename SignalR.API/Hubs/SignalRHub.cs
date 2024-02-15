@@ -82,11 +82,13 @@ namespace SignalR.API.Hubs
 
         public async Task SendNotifications()
         {
-            var readNotifications = _notificationService.ReadNotificationCount();
-            await Clients.All.SendAsync("ReceiveReadNotifications", readNotifications);
+            
 
-            var unreadNotifications = _notificationService.UnreadNotificationCount();
+          var unreadNotifications = _notificationService.UnreadNotificationCount();
             await Clients.All.SendAsync("ReceiveUnreadNotifications", unreadNotifications);
+
+            var unreadNotificationList = _notificationService.TGetFilteredList(x => x.Status == false);
+            await Clients.All.SendAsync("ReceiveUnreadNotificationList", unreadNotificationList);
 
 			
 		}

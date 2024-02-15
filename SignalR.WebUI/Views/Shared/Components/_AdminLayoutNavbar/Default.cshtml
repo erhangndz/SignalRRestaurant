@@ -3,7 +3,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-@model List<ResultNotificationDto>
+
 
 <div class="main-header">
 
@@ -35,6 +35,34 @@
 				$("#unreadNotifications").text(unreadNotifications);
 
 			});
+
+			connection.on("ReceiveUnreadNotificationList", (unreadNotificationList) => {
+				$("#notilist").empty();
+				for (var i = 0; i < unreadNotificationList.length; i++) {
+					$("#notilist").append(`<a href="#">
+															<div class="notif-icon ${unreadNotificationList[i].type}" > <i class="${unreadNotificationList[i].icon}" > </i> </div>
+					 		<div class="notif-content" >
+					 			<span class="block" >
+									 ${unreadNotificationList[i].description}
+					 				</span>
+											<span class="time" >  ${unreadNotificationList[i].date} </span>
+					 					</div>
+					 					</a>
+					 
+					 `);
+				}
+
+			});
+
+			// <a href="#" >
+			// 	<div class="notif-icon item.Type" > <i class="item.Icon" > </i> </div >
+			// 		<div class="notif-content" >
+			// 			<span class="block" >
+			// 				item.Description
+			// 				< /span>
+			// 				< span class="time" > ((DateTime.Now - item.Date).Minutes) dk.önce < /span>
+			// 					< /div>
+			// 					< /a>
 
 			
 
@@ -93,18 +121,9 @@
 						</li>
 						<li>
 							<div class="notif-center">
-								@foreach (var item in Model)
-								{
-									<a href="#">
-										<div class="notif-icon @item.Icon"> <i class="@item.Type"></i> </div>
-										<div class="notif-content">
-											<span class="block">
-												@item.Description
-											</span>
-											<span class="time">@((DateTime.Now -item.Date).Minutes) dk. önce</span>
-										</div>
-									</a>
-								}
+								
+									<div id="notilist"></div>
+								
 								
 								
 							</div>

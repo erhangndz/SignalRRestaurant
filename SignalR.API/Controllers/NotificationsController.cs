@@ -71,16 +71,25 @@ namespace SignalR.API.Controllers
             return Ok(values);
         }
 
-		[HttpGet("UnreadCount")]
+        [HttpGet("MarkAsRead/{id}")]
+        public IActionResult MarkAsRead(int id)
+        {
+            _notificationService.MarkAsRead(id);
+            return Ok("Okundu Olarak İşaretlendi");
+        }
 
-		public IActionResult UnreadCount()
-		{
-			var values = _notificationService.TFilterCount(x=>x.Status == false);
-			return Ok(values);
-		}
+        [HttpGet("MarkAsUnread/{id}")]
+        public IActionResult MarkAsUnread(int id)
+        {
+            _notificationService.MarkAsUnread(id);
+            return Ok("Okunmadı Olarak İşaretlendi");
+        }
 
 
 
 
-	}
+
+
+
+    }
 }

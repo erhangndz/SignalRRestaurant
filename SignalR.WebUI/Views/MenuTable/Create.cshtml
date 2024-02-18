@@ -1,0 +1,20 @@
+﻿@model CreateMenuTableDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Masa Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <label>Masa Adı</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <br />
+            <button type="submit" class="btn btn-outline-primary btn-round">Kaydet</button>
+        </form>
+    </div>
+</div>
+

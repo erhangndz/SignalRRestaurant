@@ -1,10 +1,44 @@
 ﻿
+@model List<ResultMenuTableDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Masalar</h3>
+    </div>
+    @{
+        int count = 0;
+    }
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Masa Adı</th>
+               
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>
+                    <td>@item.Name</td>
+                   
+                    <td>
+                        <a asp-controller="MenuTable" asp-action="Delete" asp-route-id="@item.MenuTableId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
+                        <a asp-controller="MenuTable" asp-action="Update" asp-route-id="@item.MenuTableId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="MenuTable" asp-action="Create" class="btn btn-outline-primary btn-round"><i class="la la-plus-circle"></i> Yeni Masa</a>
+    </div>
 
+
+</div>
 
 
 

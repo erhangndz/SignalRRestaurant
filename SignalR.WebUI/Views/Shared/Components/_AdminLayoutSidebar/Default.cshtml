@@ -37,9 +37,9 @@
 		</div>
 		<ul class="nav">
 			<li class="nav-item">
-				<a href="index.html">
+				<a asp-controller="Statistics" asp-action="Index">
 					<i class="la la-dashboard"></i>
-					<p>Dashboard</p>
+					<p>İstatistikler</p>
 					<span class="badge badge-count">5</span>
 				</a>
 			</li>
@@ -48,6 +48,20 @@
 					<i class="la la-user"></i>
 					<p>Hakkımızda</p>
 					
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="MenuTable" asp-action="Index">
+					<i class="la la-list"></i>
+					<p>Masalar</p>
+					<span class="badge badge-count"></span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="MenuTable" asp-action="TableListByStatus">
+					<i class="la la-list"></i>
+					<p>Anlık Masa Durumları</p>
+					<span class="badge badge-count"></span>
 				</a>
 			</li>
 			<li class="nav-item">

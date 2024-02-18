@@ -1,0 +1,102 @@
+﻿@model List<ResultMenuTableDto>
+@{
+    ViewData["Title"] = "TableListByStatus";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
+<div class="container-fluid">
+
+    <script type="text/javascript">
+
+        $(document).ready(() => {
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7135/SignalRHub").build();
+
+            $("#connstatus").text(connection.state);
+
+
+            connection.start().then(() => {
+                $("#connstatus").text(connection.state);
+
+                setInterval(() => {
+                    connection.invoke("GetMenuTableStatus");
+                }, 1000);
+
+
+
+            }).catch((err) => {
+                console.log(err)
+            });
+
+
+
+            connection.on("ReceiveMenuTableStatus", (table) => {
+                let tablehtml =` <div class="row">`;
+                $.each(table, (index, item) => {
+                    if (item.status == true) {
+
+                        var color = "card-success"
+                        var status="Masa Dolu";
+                    }
+                    else { color = ""
+                    status="Masa Boş"; }
+                   
+
+
+                    tablehtml += ` <div class="col-md-3">
+                        <div class="card card-stats ${color}">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center text-info">
+                                    <i class="la la-cutlery"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">${item.name}</p>
+                                    <h4 class="card-title" >
+                                         ${status}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+
+
+                });
+                tablehtml += '</div>';
+                $("#statusList").html(tablehtml);
+
+            });
+
+
+
+
+
+        });
+
+
+
+
+    </script>
+
+
+
+<h4 class="page-title">Anlık Masa Durumları</h4>
+
+  <div id="statusList">
+
+  </div>
+
+
+
+</div>
+

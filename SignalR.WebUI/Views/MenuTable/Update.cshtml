@@ -1,0 +1,23 @@
+﻿@model UpdateMenuTableDto
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Masa Oluştur</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="MenuTableId" />
+            <label>Masa Adı</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <br />
+            <button type="submit" class="btn btn-outline-info btn-round">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+
+

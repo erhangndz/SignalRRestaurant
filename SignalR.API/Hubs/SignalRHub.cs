@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SignalR.Business.Interfaces;
 using SignalR.DataAccess.Concrete;
+using System.Runtime.CompilerServices;
 
 namespace SignalR.API.Hubs
 {
@@ -14,6 +15,7 @@ namespace SignalR.API.Hubs
         private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
         private readonly INotificationService _notificationService;
+        
 
         public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, ICashBoxService cashBoxService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
@@ -25,6 +27,8 @@ namespace SignalR.API.Hubs
             _bookingService = bookingService;
             _notificationService = notificationService;
         }
+
+        private static int clientCount { get; set; } = 0;
 
         public async Task SendStatistics()
         {
@@ -92,6 +96,32 @@ namespace SignalR.API.Hubs
 
 			
 		}
+
+        public async Task GetMenuTableStatus()
+        {
+            var table = _menuTableService.TGetAll();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", table);
+        }
+
+        public async Task SendMessage(string user,  string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+
+        public override async Task OnConnectedAsync()
+        {
+            clientCount++;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            clientCount--;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+            await base.OnDisconnectedAsync(exception);
+        }
 
     }
 }

@@ -23,6 +23,7 @@ namespace SignalR.API.Controllers
         public IActionResult Create(CreateMenuTableDto createMenuTableDto)
         {
             var newTable = _mapper.Map<MenuTable>(createMenuTableDto);
+            newTable.Status = false;
             _menuTableService.TAdd(newTable);
             return Ok("Yeni Masa Eklendi");
         }
@@ -31,6 +32,7 @@ namespace SignalR.API.Controllers
         public IActionResult Update(UpdateMenuTableDto updateMenuTableDto)
         {
             var table = _mapper.Map<MenuTable>(updateMenuTableDto);
+            table.Status = false;
             _menuTableService.TUpdate(table);
             return Ok("Masa Güncellendi");
         }

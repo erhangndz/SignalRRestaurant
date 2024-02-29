@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignalR.Business\SignalR.Business.csproj" />
-    <ProjectReference Include="..\SignalR.DTO\SignalR.DTO.csproj" />
   </ItemGroup>
 
 </Project>

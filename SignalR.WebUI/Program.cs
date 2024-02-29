@@ -1,9 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using SignalR.DataAccess.Concrete;
+using SignalR.Entity.Entities;
 using SignalR.WebUI.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClient();
+builder.Services.AddDbContext<SignalRContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SignalRContext>();
 
 builder.Services.AddControllersWithViews();
 
@@ -21,7 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

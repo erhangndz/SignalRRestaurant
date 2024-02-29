@@ -1,0 +1,99 @@
+﻿@model RegisterDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RegistrationForm_v3 by Colorlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="~/colorlib-regform-19/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="~/colorlib-regform-19/css/style.css">
+ 
+  
+</head>
+
+<body>
+
+    <div class="wrapper" style="background-image: url('/colorlib-regform-19/images/bg-registration-form-3.jpg');">
+        <div class="inner">
+            <form method="post">
+                <h3>Kullanıcı Kaydı</h3>
+
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Ad:</label>
+                        <div class="form-holder">
+
+                            <input type="text" asp-for="Name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Soyad:</label>
+                        <div class="form-holder">
+
+                            <input type="text" asp-for="Surname" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Kullanıcı Adı:</label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <input type="text" asp-for="UserName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Email:</label>
+                        <div class="form-holder">
+                            <i style="font-style: normal; font-size: 15px"></i>
+                            <input type="email" asp-for="Email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Şifre:</label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-lock-outline"></i>
+                            <input type="password" class="form-control" asp-for="Password" placeholder="********">
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Şifre Tekrarı:</label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-lock-outline"></i>
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="********">
+                        </div>
+                    </div>
+                </div>
+
+                <div >
+                    <strong style="color:red">@Html.ValidationSummary()</strong>
+                </div>
+
+                <div class="form-end">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Kullanıcı Sözleşmesini Okudum, Kabul Ediyorum.
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="button-holder">
+                        <button>Kayıt Ol</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

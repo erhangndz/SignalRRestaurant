@@ -1,0 +1,78 @@
+﻿@model LoginDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SignalR Restaurant Kullanıcı Girişi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="~/colorlib-regform-19/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="~/colorlib-regform-19/css/style.css">
+
+
+</head>
+
+<body>
+
+    <div class="wrapper" style="background-image: url('/colorlib-regform-19/images/bg-registration-form-3.jpg');">
+        <div class="inner">
+            <form method="post">
+                <h3>Kullanıcı Girişi</h3>
+
+               
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Kullanıcı Adı:</label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-account-o"></i>
+                            <input type="text" asp-for="UserName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Şifre:</label>
+                        <div class="form-holder">
+                            <i class="zmdi zmdi-lock-outline"></i>
+                            <input type="password" asp-for="Password" class="form-control">
+                        </div>
+                    </div>
+                </div>
+              
+
+                <div>
+                    <strong style="color:red">@Html.ValidationSummary()</strong>
+                </div>
+
+                <div class="form-end">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Beni Hatırla
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="button-holder">
+                        <button>Giriş Yap</button>
+                    </div>
+
+
+                   
+                </div>
+            </form>
+            <div class="form-end">
+                Hesabınız yok mu ?  <a asp-controller="Register" asp-action="Index"> Kayıt Olun</a>
+            </div>
+            <br />
+            <div class="text-right">
+                <a asp-controller="Default" asp-action="Index"> Ana Sayfa</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

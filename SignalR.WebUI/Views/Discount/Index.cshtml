@@ -19,6 +19,7 @@
                 <th>İndirim Kodu</th>
                 <th>İndirim Oranı</th>
                 <th>Açıklama</th>
+                <th>Durum</th>
 
                 <th></th>
             </tr>
@@ -30,9 +31,12 @@
                     <td>@item.Title</td>
                     <td>% @item.DiscountRate</td>
                     <td> @(item.Description.Length > 50 ? item.Description.Substring(0, 50)+ "..." : item.Description)</td>
+                    <td>@(item.Status ? "Aktif" : "Pasif")</td>
                     <td>
                         <a asp-controller="Discount" asp-action="Delete" asp-route-id="@item.DiscountId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>
                         <a asp-controller="Discount" asp-action="Update" asp-route-id="@item.DiscountId" class="btn btn-outline-info btn-round"><i class="la la-pencil"></i> Güncelle</a>
+                        <a asp-controller="Discount" asp-action="MakeActive" asp-route-id="@item.DiscountId" class="btn btn-outline-success btn-round"><i class="la la-plus"></i> Aktif Yap</a>
+                        <a asp-controller="Discount" asp-action="MakePassive" asp-route-id="@item.DiscountId" class="btn btn-outline-dark btn-round"><i class="la la-times"></i> Pasif Yap</a>
                     </td>
                 </tr>
             }

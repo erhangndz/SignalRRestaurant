@@ -1,4 +1,5 @@
 ﻿using SignalR.Business.Interfaces;
+using SignalR.DataAccess.Concrete;
 using SignalR.DataAccess.Interfaces;
 using SignalR.Entity.Entities;
 using System;
@@ -10,13 +11,22 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class DiscountService : IDiscountService
+    public class DiscountService(IRepository<Discount> _discountRepository) : IDiscountService
     {
-        private readonly IRepository<Discount> _discountRepository;
+       
 
-        public DiscountService(IRepository<Discount> discountRepository)
+        public void ChangeStatusToFalse(int id)
         {
-            _discountRepository = discountRepository;
+            var values = _discountRepository.GetById(id);
+            values.Status = false;
+            _discountRepository.Update(values);
+        }
+
+        public void ChangeStatusToTrue(int id)
+        {
+            var values = _discountRepository.GetById(id);
+            values.Status = true;
+            _discountRepository.Update(values);
         }
 
         public void TAdd(Discount entity)

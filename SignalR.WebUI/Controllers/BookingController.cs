@@ -47,5 +47,27 @@ namespace SignalR.WebUI.Controllers
 
             return RedirectToAction("Index");
         }
+
+    
+        public async Task<IActionResult> Approve(int id)
+        {
+            var booking = await _client.GetFromJsonAsync<UpdateBookingDto>($"bookings/{id}");
+          
+            booking.ReservationStatus = "Rezervasyon Onaylandı";
+            await _client.PutAsJsonAsync("bookings", booking);
+            return RedirectToAction("Index");
+        }
+
+    
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var booking = await _client.GetFromJsonAsync<UpdateBookingDto>($"bookings/{id}");
+
+            booking.ReservationStatus = "Rezervasyon İptal Edildi";
+            await _client.PutAsJsonAsync("bookings", booking);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

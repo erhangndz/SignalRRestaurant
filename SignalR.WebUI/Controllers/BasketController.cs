@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SignalR.WebUI.ClientHandler;
 using SignalR.WebUI.Dtos.BasketDtos;
 
 namespace SignalR.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class BasketController : Controller
     {
         private readonly HttpClient client = HttpClientInstance.CreateClient();

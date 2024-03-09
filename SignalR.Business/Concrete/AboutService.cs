@@ -10,16 +10,9 @@ using System.Threading.Tasks;
 
 namespace SignalR.Business.Concrete
 {
-    public class AboutService : IAboutService
+    public class AboutService(IRepository<About> _aboutRepository) : IAboutService
     {
-        private readonly IRepository<About> _aboutRepository;
        
-
-        public AboutService(IRepository<About> aboutRepository)
-        {
-            _aboutRepository = aboutRepository;
-   
-        }
 
         public void TAdd(About entity)
         {

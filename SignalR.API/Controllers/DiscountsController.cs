@@ -27,6 +27,7 @@ namespace SignalR.API.Controllers
         public IActionResult Create(CreateDiscountDto createDiscountDto)
         {
             var newDiscount = _mapper.Map<Discount>(createDiscountDto);
+            newDiscount.Status = false;
             _discountService.TAdd(newDiscount);
             return Ok("Yeni İndirim Kodu Eklendi");
         }
@@ -35,6 +36,7 @@ namespace SignalR.API.Controllers
         public IActionResult Update(UpdateDiscountDto updateDiscountDto)
         {
             var discount = _mapper.Map<Discount>(updateDiscountDto);
+            discount.Status = false;
             _discountService.TUpdate(discount);
             return Ok("İndirim Kodu Güncellendi");
         }
@@ -52,5 +54,21 @@ namespace SignalR.API.Controllers
             var value = _discountService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("MakeActive/{id}")]
+        public IActionResult MakeActive(int id)
+        {
+            _discountService.ChangeStatusToTrue(id);
+            return Ok("Durum Aktif");
+        }
+
+        [HttpGet("MakePassive/{id}")]
+        public IActionResult MakePassive(int id)
+        {
+            _discountService.ChangeStatusToFalse(id);
+            return Ok("Durum Pasif");
+        }
+
+
     }
 }

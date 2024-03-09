@@ -45,5 +45,18 @@ namespace SignalR.WebUI.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        public async Task<IActionResult> MakeActive(int id)
+        {
+            await _client.GetAsync($"discounts/makeactive/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> MakePassive(int id)
+        {
+            await _client.GetAsync($"discounts/makepassive/{id}");
+            return RedirectToAction("Index");
+        }
     }
 }

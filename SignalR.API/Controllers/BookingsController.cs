@@ -50,5 +50,7 @@ namespace SignalR.API.Controllers
             var value = _bookingsService.TGetById(id);
             return Ok(value);
         }
+
+
     }
 }

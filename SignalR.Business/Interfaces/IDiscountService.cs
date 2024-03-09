@@ -9,5 +9,8 @@ namespace SignalR.Business.Interfaces
 {
     public interface IDiscountService: IGenericService<Discount>
     {
+
+        void ChangeStatusToTrue(int id);
+        void ChangeStatusToFalse(int id);
     }
 }

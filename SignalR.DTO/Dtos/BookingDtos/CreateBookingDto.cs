@@ -15,6 +15,8 @@ namespace SignalR.DTO.Dtos.BookingDtos
         public string Email { get; set; }
         public int PersonCount { get; set; }
 
+        public string? ReservationStatus { get; set; }
+
         public DateTime BookingDate { get; set; }
     }
 }

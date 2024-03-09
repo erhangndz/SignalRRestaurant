@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using SignalR.DataAccess.Concrete;
 using SignalR.Entity.Entities;
@@ -13,8 +16,36 @@ builder.Services.AddDbContext<SignalRContext>(options =>
 });
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SignalRContext>();
+builder.Services.AddControllersWithViews(cfg =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    cfg.Filters.Add(new AuthorizeFilter(policy));
 
-builder.Services.AddControllersWithViews();
+    
+});
+builder.Services.ConfigureApplicationCookie(_ =>
+{
+    _.LoginPath = new PathString("/Login/Index");
+    _.AccessDeniedPath = new PathString("/ErrorPage/AccessDenied/");
+    _.LogoutPath = new PathString("/Login/Logout");
+
+
+});
+
+builder.Services.AddAuthorization(opt =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.AddPolicy("", policy);
+    
+    
+});
+builder.Services.AddAuthentication(options =>
+{
+    options.RequireAuthenticatedSignIn = true;
+    
+
+});
+
 
 var app = builder.Build();
 

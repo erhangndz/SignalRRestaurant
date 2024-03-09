@@ -13,5 +13,6 @@ namespace SignalR.DTO.Dtos.DiscountDtos
         public int DiscountRate { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public bool Status { get; set; }
     }
 }

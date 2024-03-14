@@ -1,0 +1,67 @@
+﻿
+@model CreateMessageDto
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Bize Ulaşın
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form method="post" asp-controller="Default" asp-action="SendMessage">
+                        <div>
+                            <input type="text" class="form-control" asp-for="Name" placeholder="Adınız Soyadınız" />
+                        </div>
+                       
+                        <div>
+                            <input type="email" class="form-control" asp-for="Email" placeholder="Email Adresiniz" />
+                        </div>
+
+                        <div>
+                            <input type="text" class="form-control" asp-for="Subject" placeholder="Konu" />
+                        </div>
+
+                        <div>
+                            <textarea type="text" class="form-control" asp-for="Content" rows="10" placeholder="Mesajınızı yazın..."></textarea>
+                        </div>
+                       
+                       
+                        <div class="btn_box">
+                            <button onclick="sendMessage()">
+                                Mesajı Gönder
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map_container ">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12239.22148397702!2d32.82811716364736!3d39.92337154436757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f1b6800f1b9%3A0xf98d976af12dada0!2zWcO8Y2V0ZXBlLCDDh2Fua2F5YS9BbmthcmE!5e0!3m2!1str!2str!4v1706700975203!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function sendMessage() {
+        Swal.fire({
+
+            title: 'Tebrikler!',
+            text: 'Mesajınız Gönderildi. Size en kısa sürede dönüş yapılacaktır.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Tamam',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Default/Index" // Yönlendirilecek URL'yi buraya yazın
+            }
+        });
+    }
+</script>

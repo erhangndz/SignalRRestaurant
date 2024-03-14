@@ -10,7 +10,7 @@ namespace SignalR.WebUI.ViewComponents.Home
         public async Task<IViewComponentResult> InvokeAsync()
         {
            
-            var discounts = await _client.GetFromJsonAsync<List<ResultDiscountDto>>("discounts");
+            var discounts = await _client.GetFromJsonAsync<List<ResultDiscountDto>>("discounts/getactives");
             return View(discounts);
         }
     }

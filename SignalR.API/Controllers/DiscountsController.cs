@@ -69,6 +69,22 @@ namespace SignalR.API.Controllers
             return Ok("Durum Pasif");
         }
 
+        [HttpGet("GetActives")]
+        public IActionResult GetActives()
+        {
+            var values = _discountService.TGetFilteredList(x => x.Status == true);
+            var actives = _mapper.Map<List<ResultDiscountDto>>(values);
+            return Ok(actives);
+        }
+
+        [HttpGet("GetPassives")]
+        public IActionResult GetPassives()
+        {
+            var values = _discountService.TGetFilteredList(x => x.Status == false);
+            var passives = _mapper.Map<List<ResultDiscountDto>>(values);
+            return Ok(passives);
+        }
+
 
     }
 }

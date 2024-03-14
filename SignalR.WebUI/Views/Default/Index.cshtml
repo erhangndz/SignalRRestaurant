@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
+    ViewData["default"] = "active";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -19,7 +20,7 @@
 @await Component.InvokeAsync("_HomeAbout")
 <!-- end about section -->
 <!-- book section -->
-@await Component.InvokeAsync("_HomeBook")
+@await Html.PartialAsync("SendMessage")
 <!-- end book section -->
 <!-- testimonial section -->
 @await Component.InvokeAsync("_HomeTestimonial")

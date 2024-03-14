@@ -10,243 +10,242 @@
 
 
 <div class="content">
-    <div class="container-fluid">
 
-        <script type="text/javascript">
 
-            $(document).ready(() => {
-                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7135/SignalRHub").build();
+    <script type="text/javascript">
 
+        $(document).ready(() => {
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7135/SignalRHub").build();
+
+            $("#connstatus").text(connection.state);
+
+
+            connection.start().then(() => {
                 $("#connstatus").text(connection.state);
 
-
-                connection.start().then(() => {
-                    $("#connstatus").text(connection.state);
-
-                    setInterval(() => {
-                        connection.invoke("SendProgress");
-                    }, 1000);
+                setInterval(() => {
+                    connection.invoke("SendProgress");
+                }, 1000);
 
 
 
-                }).catch((err) => {
-                    console.log(err)
-                });
+            }).catch((err) => {
+                console.log(err)
+            });
 
 
 
-                connection.on("ReceiveTotalCash", (totalCash) => {
+            connection.on("ReceiveTotalCash", (totalCash) => {
 
-                    $("#totalCash").text(totalCash);
+                $("#totalCash").text(totalCash);
 
-                });
-                connection.on("ReceiveActiveOrderCount", (activeOrders) => {
+            });
+            connection.on("ReceiveActiveOrderCount", (activeOrders) => {
 
-                    $("#activeOrders").text(activeOrders);
+                $("#activeOrders").text(activeOrders);
 
-                });
-                connection.on("ReceiveTotalTableCount", (totalTableCount) => {
+            });
+            connection.on("ReceiveTotalTableCount", (totalTableCount) => {
 
-                    $("#totalTableCount").text(totalTableCount);
-
-                });
-
-               
-
-
-
+                $("#totalTableCount").text(totalTableCount);
 
             });
 
 
 
 
-        </script>
+
+
+        });
 
 
 
-        <h4 class="card-title">İstatistikler ve Durumlar</h4>
-        <div class="row">
-            <div class="row row-card-no-pd">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="fw-bold mt-1">Kasadaki Tutar</p>
-                            <h4 id="totalCash">
-                                <b>
-                                    <div class="spinner-grow spinner-grow-sm" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                </b>
-                            </h4>
-                            <a href="/Order/CreateOrder" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> Yeni Sipariş</a>
+
+    </script>
+
+
+
+    <h4 class="card-title">Anlık Durum İlerleme</h4>
+
+    <div class="row row-card-no-pd col-12">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <p class="fw-bold mt-1">Kasadaki Tutar</p>
+                    <h4 id="totalCash">
+                        <b>
+                            <div class="spinner-grow spinner-grow-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </b>
+                    </h4>
+                    <a href="/Order/CreateOrder" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> Yeni Sipariş</a>
+                </div>
+                <div class="card-footer">
+                    <ul class="nav">
+                        <li class="nav-item"><a class="btn btn-default btn-link" href="/Order/Index"><i class="la la-history"></i> Siparişler</a></li>
+                        <li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="/ProgressBar/Index/"><i class="la la-refresh"></i> Sayfayı Yenile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Profit</span>
+                            <span class="text-muted fw-bold"> $3K</span>
                         </div>
-                        <div class="card-footer">
-                            <ul class="nav">
-                                <li class="nav-item"><a class="btn btn-default btn-link" href="/Order/Index"><i class="la la-history"></i> Siparişler</a></li>
-                                <li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="/ProgressBar/Index/"><i class="la la-refresh"></i> Sayfayı Yenile</a></li>
-                            </ul>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Profit</span>
-                                    <span class="text-muted fw-bold"> $3K</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Orders</span>
-                                    <span class="text-muted fw-bold"> 576</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Tasks Complete</span>
-                                    <span class="text-muted fw-bold"> 70%</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Open Rate</span>
-                                    <span class="text-muted fw-bold"> 60%</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Profit</span>
-                                    <span class="text-muted fw-bold"> $3K</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Orders</span>
-                                    <span class="text-muted fw-bold"> 576</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Tasks Complete</span>
-                                    <span class="text-muted fw-bold"> 70%</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-card">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="text-muted">Open Rate</span>
-                                    <span class="text-muted fw-bold"> 60%</span>
-                                </div>
-                                <div class="progress mb-2" style="height: 7px;">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div>
-                                </div>
-                            </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Orders</span>
+                            <span class="text-muted fw-bold"> 576</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-stats">
-                        <div class="card-body">
-                            <p class="fw-bold mt-1">İstatistikler</p>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center icon-warning">
-                                        <i class="la la-cutlery text-warning"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 d-flex align-items-center">
-                                    <div class="numbers">
-                                        <p class="card-category">Aktif Siparişler</p>
-                                        <h4 class="card-title" id="activeOrders">
-                                            <div class="spinner-grow spinner-grow-sm" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center">
-                                        <i class="la la-table text-primary"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 d-flex align-items-center">
-                                    <div class="numbers">
-                                        <p class="card-category">Toplam Masa Sayısı</p>
-                                        <h4 class="card-title" id="totalTableCount">
-                                            <div class="spinner-grow spinner-grow-sm" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center icon-info">
-                                        <i class="la la-cutlery text-info"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 d-flex align-items-center">
-                                    <div class="numbers">
-                                        <p class="card-category">Aktif Siparişler</p>
-                                        <h4 class="card-title" id="activeOrders">
-                                            <div class="spinner-grow spinner-grow-sm" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center icon-warning">
-                                        <i class="la la-cutlery text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 d-flex align-items-center">
-                                    <div class="numbers">
-                                        <p class="card-category">Aktif Siparişler</p>
-                                        <h4 class="card-title" id="activeOrders">
-                                            <div class="spinner-grow spinner-grow-sm" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                       
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Tasks Complete</span>
+                            <span class="text-muted fw-bold"> 70%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Open Rate</span>
+                            <span class="text-muted fw-bold"> 60%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Profit</span>
+                            <span class="text-muted fw-bold"> $3K</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Orders</span>
+                            <span class="text-muted fw-bold"> 576</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Tasks Complete</span>
+                            <span class="text-muted fw-bold"> 70%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-muted">Open Rate</span>
+                            <span class="text-muted fw-bold"> 60%</span>
+                        </div>
+                        <div class="progress mb-2" style="height: 7px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <p class="fw-bold mt-1">İstatistikler</p>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="la la-cutlery text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Aktif Siparişler</p>
+                                <h4 class="card-title" id="activeOrders">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="la la-table text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Toplam Masa Sayısı</p>
+                                <h4 class="card-title" id="totalTableCount">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center icon-info">
+                                <i class="la la-cutlery text-info"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Aktif Siparişler</p>
+                                <h4 class="card-title" id="activeOrders">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="la la-cutlery text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 d-flex align-items-center">
+                            <div class="numbers">
+                                <p class="card-category">Aktif Siparişler</p>
+                                <h4 class="card-title" id="activeOrders">
+                                    <div class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+    </div>

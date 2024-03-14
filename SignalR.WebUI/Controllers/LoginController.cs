@@ -23,7 +23,7 @@ namespace SignalR.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(LoginDto loginDto)
+        public async Task<IActionResult> Index(LoginDto loginDto,string? returnUrl)
         {
             
             var result = await _signInManager.PasswordSignInAsync(loginDto.UserName, loginDto.Password, false, false);
@@ -32,7 +32,15 @@ namespace SignalR.WebUI.Controllers
                 ModelState.AddModelError("", "Kullanıcı Adı veya Şifre Yanlış");
                 return View();
             }
-            return RedirectToAction("Index","AdminAbout");
+            if (returnUrl != null)
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "AdminAbout");
+            }
+                
         }
 
         public async Task<IActionResult> Logout()

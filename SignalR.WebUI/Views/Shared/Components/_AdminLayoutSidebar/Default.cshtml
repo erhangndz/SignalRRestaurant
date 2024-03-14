@@ -17,18 +17,23 @@
 				<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
 					<ul class="nav">
 						<li>
-							<a href="#profile">
-								<span class="link-collapse">Profil</span>
-							</a>
-						</li>
-						<li>
-							<a href="#edit">
-								<span class="link-collapse">Profili Düzenle</span>
-							</a>
-						</li>
-						<li>
-							<a href="#settings">
+							<a href="/Setting/Index">
 								<span class="link-collapse">Ayarlar</span>
+							</a>
+						</li>
+						<li>
+							<a href="/Login/Logout">
+								<span class="link-collapse">Çıkış Yap </span>
+							</a>
+						</li>
+						<li>
+							<a href="/Default/Index">
+								<span class="link-collapse">Siteye Git</span>
+							</a>
+						</li>
+						<li>
+							<a href="/Register/Index">
+								<span class="link-collapse">Yeni Kayıt</span>
 							</a>
 						</li>
 					</ul>
@@ -40,7 +45,14 @@
 				<a asp-controller="Statistics" asp-action="Index">
 					<i class="la la-dashboard"></i>
 					<p>İstatistikler</p>
-					<span class="badge badge-count">5</span>
+					
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="ProgressBar" asp-action="Index">
+					<i class="la la-bar-chart"></i>
+					<p>Anlık Durum İlerleme</p>
+
 				</a>
 			</li>
 			<li class="nav-item">
@@ -85,6 +97,21 @@
 
 				</a>
 			</li>
+
+			<li class="nav-item">
+				<a asp-controller="Message" asp-action="Index">
+					<i class="la la-comment"></i>
+					<p> Mesaj Sayfası</p>
+
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="Notification" asp-action="Index">
+					<i class="la la-info"></i>
+					<p> Bildirimler</p>
+
+				</a>
+			</li>
 			<li class="nav-item">
 				<a asp-controller="AdminContact" asp-action="Index">
 					<i class="la la-phone"></i>
@@ -110,6 +137,13 @@
 				<a asp-controller="SocialMedia" asp-action="Index">
 					<i class="la la-linkedin"></i>
 					<p>Sosyal Medya</p>
+
+				</a>
+			</li>
+			<li class="nav-item">
+				<a asp-controller="Testimonial" asp-action="Index">
+					<i class="la la-quote-left"></i>
+					<p>Referanslar</p>
 
 				</a>
 			</li>

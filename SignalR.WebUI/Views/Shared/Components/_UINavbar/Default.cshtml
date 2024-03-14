@@ -13,17 +13,17 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mx-auto ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/Default/Index">AnaSayfa<span class="sr-only">(current)</span></a>
+                    <li class="nav-item @ViewData["default"]">
+                        <a class="nav-link" href="/Default/Index/">AnaSayfa</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Menu/Index">Menü</a>
+                    <li class="nav-item @ViewData["menu"]">
+                        <a class="nav-link" href="/Menu/Index/">Menü</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/About/Index">Hakkımızda</a>
+                    <li class="nav-item @ViewData["about"]">
+                        <a class="nav-link" href="/About/Index/">Hakkımızda</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/BookATable/Index">Rezervasyon</a>
+                    <li class="nav-item @ViewData["bookatable"]">
+                        <a class="nav-link" href="/BookATable/Index/">Rezervasyon</a>
                     </li>
                 </ul>
                 <div class="user_option">

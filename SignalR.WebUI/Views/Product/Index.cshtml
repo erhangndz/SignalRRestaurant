@@ -30,7 +30,7 @@
                     <td>@item.ProductName</td>
                     <td>@item.Description</td>
                     <td>@item.Price ₺</td>
-                    <td>@( item.Status ? "Aktif" : "Pasif" )</td>
+                    <td class="@(item.Status ? "badge badge-success" : "badge badge-danger")">@(item.Status ? "Aktif" : "Pasif")</td>
                     <td>@item.CategoryName</td>
                     <td>
                         <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>

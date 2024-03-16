@@ -18,6 +18,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,10 @@
     <Reference Include="QRCoder">
       <HintPath>..\..\..\..\Documents\1- YAZILIM DÖKÜMANLARI\UdemySignalRProject-master\UdemySignalRProject-master\SignalRWebUI\QRCoder.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\QRimages\" />
   </ItemGroup>
 
 </Project>

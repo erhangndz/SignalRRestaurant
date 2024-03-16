@@ -7,21 +7,40 @@
     <div class="card-header">
         <h3 class="card-title">QR Kod İşlemleri</h3>
     </div>
-   
+
     <div class="card-body">
         <form method="post" asp-controller="QRCode" asp-action="Index">
-            <input type="text" name="value"  />
+            <input type="text" name="value" />
             <input type="submit" value="QR Kod Oluştur" class="btn btn-warning" />
 
 
-            <br /><br />
 
-            @if (ViewBag.qrCodeImage != null)
-        {
-                <img src="@ViewBag.qrCodeImage" alt="" style="width:400px;height:400px" />
-        }
+
+
 
         </form>
+        <br /><br />
+
+        @if (ViewBag.qrCodeImage != null)
+        {
+            <img src="@ViewBag.qrCodeImage" alt="" style="width:400px;height:400px" />
+     
+            <div class="col-12">
+                <a href="/QRCode/Decode" class="btn btn-outline-info">QR Kodu Oku </a>
+            </div>
+        }
+
+       
+        @if (ViewBag.qrText != null)
+        {
+       
+       
+
+            <br />
+            <div class="alert alert-info">
+                <strong>QR Kod Metni   :</strong>   @ViewBag.qrText 
+            </div>
+        }
 
 
     </div>

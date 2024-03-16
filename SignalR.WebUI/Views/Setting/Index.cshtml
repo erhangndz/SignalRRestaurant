@@ -1,0 +1,55 @@
+﻿@model UserEditDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="card-title">Profil Ayarları</h3>
+<div class="card">
+  
+    
+    <div class="card-body">
+        <div class="card-header">
+            <h5 class="card-title">Şifre ve Bilgi Güncelleme Sayfası</h5>
+        </div>
+       
+
+
+        <form method="post">
+            <label>Adınız</label>
+            <input type="text" asp-for="Name" class="form-control" required/>
+            <br />
+            <label>Soyadınız</label>
+            <input type="text" asp-for="Surname" class="form-control" required />
+            <br />
+            <label>Kullanıcı Adınız</label>
+            <input type="text" asp-for="UserName" class="form-control" required/>
+            <br />
+            <label>Email</label>
+            <input type="email" asp-for="Email" class="form-control" required />
+            <br />
+
+            <label>Şu Anki Şifreniz</label>
+            <input type="password" asp-for="OldPassword" class="form-control" required />
+            <br />
+            <label>Yeni Şifreniz</label>
+            <input type="password" asp-for="Password" class="form-control" required />
+            <br />
+            <label>Yeni Şifrenizi Tekrar Girin</label>
+            <input type="password" asp-for="ConfirmPassword" class="form-control" required />
+            <br />
+
+
+            <p style="background-color:red"> @Html.ValidationSummary()</p>
+
+
+            <button class="btn btn-outline-primary btn-round"><i class="la la-pencil"></i> Verileri Güncelle</button>
+        </form>
+
+
+
+       
+    </div>
+
+
+</div>

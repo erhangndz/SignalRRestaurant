@@ -54,10 +54,11 @@
                     <div class="footer_social">
                         @foreach (var item in ViewBag.socialmedias as List<ResultSocialMediaDto>)
                         {
-                            <a href="@item.Url" target="_blank">
-                                <i class="@item.Icon" aria-hidden="true"></i>
-                                
+                         
+                            <a href="@item.Url" target="_blank" >
+                                <i class="fa fa-@item.Icon" aria-hidden="true"></i>             
                             </a>
+                            
                         }
                     </div>
 

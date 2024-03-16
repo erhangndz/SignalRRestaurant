@@ -26,7 +26,7 @@
                 <tr>
                     <th>@count</th>
                
-                    <td><a href="@item.Url" target="_blank" ><i class="@item.Icon la-2x"></i>   @item.Title</a> </td>
+                    <td><a href="@item.Url" target="_blank" ><i class="la la-@item.Icon la-4x"></i>   @item.Title</a> </td>
 
                     <td>
                         <a asp-controller="SocialMedia" asp-action="Delete" asp-route-id="@item.SocialMediaId" class="btn btn-outline-danger btn-round"><i class="la la-trash"></i> Sil</a>

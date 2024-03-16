@@ -24,4 +24,10 @@
     <ProjectReference Include="..\SignalR.DataAccess\SignalR.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\..\..\Documents\1- YAZILIM DÖKÜMANLARI\UdemySignalRProject-master\UdemySignalRProject-master\SignalRWebUI\QRCoder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -23,28 +23,17 @@ builder.Services.AddControllersWithViews(cfg =>
 
     
 });
-builder.Services.ConfigureApplicationCookie(_ =>
+builder.Services.ConfigureApplicationCookie(x =>
 {
-    _.LoginPath = new PathString("/Login/Index");
-    _.AccessDeniedPath = new PathString("/ErrorPage/AccessDenied/");
-    _.LogoutPath = new PathString("/Login/Logout");
+    x.LoginPath = new PathString("/Login/Index");
+    x.AccessDeniedPath = new PathString("/ErrorPage/AccessDenied/");
+    x.LogoutPath = new PathString("/Login/Logout");
 
 
 });
 
-builder.Services.AddAuthorization(opt =>
-{
-    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-    opt.AddPolicy("", policy);
-    
-    
-});
-builder.Services.AddAuthentication(options =>
-{
-    options.RequireAuthenticatedSignIn = true;
-    
 
-});
+
 
 
 var app = builder.Build();

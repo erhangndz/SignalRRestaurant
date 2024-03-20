@@ -6,27 +6,9 @@ using System.Runtime.CompilerServices;
 
 namespace SignalR.API.Hubs
 {
-    public class SignalRHub : Hub
+    public class SignalRHub(ICategoryService _categoryService, IProductService _productService, IOrderService _orderService, ICashBoxService _cashBoxService, IMenuTableService _menuTableService, IBookingService _bookingService, INotificationService _notificationService) : Hub
     {
-        private readonly ICategoryService _categoryService;
-        private readonly IProductService _productService;
-        private readonly IOrderService _orderService;
-        private readonly ICashBoxService _cashBoxService;
-        private readonly IMenuTableService _menuTableService;
-        private readonly IBookingService _bookingService;
-        private readonly INotificationService _notificationService;
-        
-
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, ICashBoxService cashBoxService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
-        {
-            _categoryService = categoryService;
-            _productService = productService;
-            _orderService = orderService;
-            _cashBoxService = cashBoxService;
-            _menuTableService = menuTableService;
-            _bookingService = bookingService;
-            _notificationService = notificationService;
-        }
+       
 
         private static int clientCount { get; set; } = 0;
 
@@ -78,7 +60,16 @@ namespace SignalR.API.Hubs
             await Clients.All.SendAsync("ReceiveTotalTableCount", totalTableCount);
 
             var avgPriceValue = _productService.AvgProductPrice();
-            await Clients.All.SendAsync("ReceiveAvgPriceValue", avgPriceValue.ToString("00.00") );
+            await Clients.All.SendAsync("ReceiveAvgPriceValue", avgPriceValue.ToString("00") );
+
+            var hamburgerCount = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "hamburger");
+            await Clients.All.SendAsync("ReceiveHamburgerCount", hamburgerCount);
+
+            var drinkCount = _productService.TFilterCount(x => x.Category.CategoryName.ToLower() == "içecek");
+            await Clients.All.SendAsync("ReceiveDrinkCount", drinkCount);
+
+            var avgHamburgerPrice = _productService.AvgHamburgerPrice();
+            await Clients.All.SendAsync("ReceiveAvgHamburgerPrice", avgHamburgerPrice.ToString("00") );
         }
 
         public async Task GetBookingList()

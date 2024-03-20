@@ -76,6 +76,9 @@ namespace SignalR.API.Hubs
             await Clients.All.SendAsync("ReceiveActiveOrderCount", activeOrders);
             var totalTableCount = _menuTableService.TCount();
             await Clients.All.SendAsync("ReceiveTotalTableCount", totalTableCount);
+
+            var avgPriceValue = _productService.AvgProductPrice();
+            await Clients.All.SendAsync("ReceiveAvgPriceValue", avgPriceValue.ToString("00.00") );
         }
 
         public async Task GetBookingList()

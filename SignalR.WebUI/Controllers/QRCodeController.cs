@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using QRCoder;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Text;
 using ZXing;
 using ZXing.Windows.Compatibility;

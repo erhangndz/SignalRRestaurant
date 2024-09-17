@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
 using SignalR.WebUI.ClientHandler;
+using SignalR.WebUI.Dtos;
 using SignalR.WebUI.Dtos.AboutDtos;
 
 namespace SignalR.WebUI.Controllers
@@ -29,8 +32,14 @@ namespace SignalR.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateAboutDto createAboutDto)
         {
-            await _client.PostAsJsonAsync("abouts", createAboutDto);
-            return RedirectToAction("Index");
+           var result =  await _client.PostAsJsonAsync("abouts", createAboutDto);
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            return View(createAboutDto);
+            
         }
 
         public async Task<IActionResult> Update(int id)

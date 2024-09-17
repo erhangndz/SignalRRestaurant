@@ -1,12 +1,10 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using SignalR.API.Extensions;
 using SignalR.API.Hubs;
-using SignalR.Business.Concrete;
-using SignalR.Business.Interfaces;
+using SignalR.Business.Validators;
 using SignalR.DataAccess.Concrete;
-using SignalR.DataAccess.Interfaces;
-using SignalR.DataAccess.Repositories;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -36,9 +34,9 @@ builder.Services.AddDbContext<SignalRContext>(options =>
 
 
 
-
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<AboutValidator>();
 builder.Services.AddControllersWithViews().AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler= ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

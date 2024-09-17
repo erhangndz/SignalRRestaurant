@@ -38,11 +38,9 @@ namespace SignalR.API.Controllers
         public IActionResult Create(CreateAboutDto createAboutDto)
         {
             var newAbout = _mapper.Map<About>(createAboutDto);
-            var validator = new AboutValidator();
-            var result = validator.Validate(newAbout);
-            if (!result.IsValid)
+           if(!ModelState.IsValid)
             {
-                return BadRequest(result);
+                return BadRequest();
             }
             _aboutService.TAdd(newAbout);
             return Ok("Hakkımızda başarıyla eklendi");
@@ -52,11 +50,10 @@ namespace SignalR.API.Controllers
         public IActionResult Update(UpdateAboutDto updateAboutDto)
         {
             var about = _mapper.Map<About>(updateAboutDto);
-            var validator = new AboutValidator();
-            var result = validator.Validate(about);
-            if (!result.IsValid)
+           
+            if (!ModelState.IsValid)
             {
-                return BadRequest(result);
+                return BadRequest();
             }
             _aboutService.TUpdate(about);
             return Ok("Hakkımızda başarıyla güncellendi");
